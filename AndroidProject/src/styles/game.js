@@ -14,6 +14,8 @@ const styles = StyleSheet.create({
   },
   gameBtn1: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   gameBtn2: {
     flex: 1,
