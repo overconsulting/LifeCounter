@@ -6,14 +6,12 @@ import stylesGame from '../styles/game';
 import Player from '../component/player';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Game = async () => {
 
+const Game = () => {
   return (
     <View style={stylesGame.container}>
-      <Player
-        player= '1'
-      />
-      <Player player="2" />
+      <Player playerId="1" color={stylesGame.firstPart}/>
+      <Player playerId="2" color={stylesGame.secondPart}/>
     </View>
   );
 };
