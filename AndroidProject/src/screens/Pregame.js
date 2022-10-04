@@ -12,8 +12,8 @@ const Pregame = ({navigation}) => {
   let [fourthPlayer, setFourthPlayer] = React.useState('');
   async function goToGame() {
     if (firstPlayer != '' && secondPlayer != '') {
-      await AsyncStorage.setItem('Player1', JSON.stringify({lifePoint:20, name:firstPlayer, color:stylesGame.firstPart}));
-      
+      await AsyncStorage.setItem('Player1', JSON.stringify({lifePoint:'20', name:firstPlayer}));
+      await AsyncStorage.setItem('Player2', JSON.stringify({lifePoint:'20', name:secondPlayer}));
       navigation.navigate('Game');
     } else {
       alert('Please enter atleat 2 players');
@@ -30,24 +30,24 @@ const Pregame = ({navigation}) => {
         <TextInput
           style={stylesPregame.textInput}
           placeholder="First Player"
-          onChangeText={setFirstPlayer}
+          onChangeText={(newText)=>setFirstPlayer(newText)}
         />
         <TextInput
           style={stylesPregame.textInput}
           placeholder="Second Player"
-          onChangeText={setSecondPlayer}
+          onChangeText={(newText)=>setSecondPlayer(newText)}
           editable={firstPlayer == '' ? false : true}
         />
         <TextInput
           style={stylesPregame.textInput}
           placeholder="Third Player"
-          onChangeText={setThirdPlayer}
+          onChangeText={(newText)=>setThirdPlayer(newText)}
           editable={secondPlayer == '' ? false : true}
         />
         <TextInput
           style={stylesPregame.textInput}
           placeholder="Fourth Player"
-          onChangeText={setFourthPlayer}
+          onChangeText={(newText)=>setFourthPlayer(newText)}
           editable={thirdPlayer == '' ? false : true}
         />
         <TouchableOpacity

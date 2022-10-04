@@ -1,19 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import stylesGame from '../styles/game';
-const Player = ({playerId}) => {
-    const [player,setPlayer] = useState(null)
+const Player = ({playerId,color}) => {
+    const [player,setPlayer] = useState('')
     useEffect(() =>{
         const getPlayer = async () =>{
-            const player1 = await AsyncStorage.getItem('Player'+playerId)
-            setPlayer(JSON.parse(player1))
+            const players = await AsyncStorage.getItem('Player'+playerId)
+            setPlayer(JSON.parse(players))
+            console.log(JSON.stringify(players))
         }
         getPlayer()
     },[]);
   return (
-    <View style={player.color}>
-      <View style={player.color}>
+    <View style={color}>
+      <View style={color}>
         <TouchableOpacity
           style={stylesGame.gameBtn1}
         //   onPress={() => plusLifePoint(lifePoint1)}
@@ -25,11 +26,11 @@ const Player = ({playerId}) => {
           <Text style={stylesGame.text}> Game screen </Text>
         </TouchableOpacity>
       </View>
-      <View style={player.color}>
-        <Text style={stylesGame.player1}>{player.lifepoint}</Text>
+      <View style={color}>
+        <Text style={stylesGame.player1}>{player.lifePoint}</Text>
         <Text style={stylesGame.player1}>{player.name}</Text>
       </View>
-      <View style={player.color}>
+      <View style={color}>
         <TouchableOpacity
           style={stylesGame.gameBtn1}
         //   onPress={() => minusLifePoint(lifePoint1)}
