@@ -3,15 +3,13 @@ import {View, Text, TouchableOpacity, TextInput} from 'react-native';
 
 import stylesHome from '../styles/home';
 const Home = ({navigation}) => {
-    let [name] = React.useState('Louis');
   return (
     <View style={stylesHome.home}>
+      <Text style={stylesHome.title}> Welcome to LifePoint counteur</Text>
       <View style={stylesHome.home}>
-        <Text>Home</Text>
-        <TouchableOpacity onPress={() => navigation.navigate('Game')}>
-          <Text>Game</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('Pregame')} style={stylesHome.gameBtn}>
+          <Text>Pre - Game</Text>
         </TouchableOpacity>
-        <TextInput style={stylesHome.textInput} value={name} onChange />
       </View>
     </View>
   );
