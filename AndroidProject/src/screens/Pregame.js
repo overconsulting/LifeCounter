@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, TextInput} from 'react-native';
+import {View, Text, TouchableOpacity, TextInput, ImageBackground} from 'react-native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import stylesPregame from '../styles/pregame';
@@ -69,12 +69,13 @@ const Pregame = ({navigation}) => {
   }
 
   return (
+    <ImageBackground source={require('../img/bg3.jpg')} style={stylesPregame.bg}>
     <View style={stylesPregame.main}>
       <View style={stylesPregame.firstContainer}>
         <Text style={stylesPregame.title}> This is the lobby for the game</Text>
       </View>
       <View style={stylesPregame.secondContainer}>
-        <Text> Put your nickname : </Text>
+        <Text style={stylesPregame.text}> Put your nickname : </Text>
         <TextInput
           style={stylesPregame.textInput}
           value={firstPlayer}
@@ -114,6 +115,7 @@ const Pregame = ({navigation}) => {
         </TouchableOpacity>
       </View>
     </View>
+    </ImageBackground>
   );
 };
 export default Pregame;

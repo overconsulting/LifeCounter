@@ -1,6 +1,10 @@
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
+    bg:{
+        width: '100%',
+        height: '100%',
+    },
     main:{
         flex: 1,
     },
@@ -12,9 +16,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     } ,
     title:{
-        fontSize: 20,
+        fontSize: 30,
         fontWeight: 'bold',
-        color: 'black',
+        color: 'white',
         textAlign: 'center',
         margin: 10,
     },
@@ -24,7 +28,9 @@ const styles = StyleSheet.create({
         width: 200,
         height: 40,
         fontSize: 20,
+        textAlign: 'center',
         margin: 10,
+        color: 'black',
     },
     startBtn:{
         backgroundColor:'green',
@@ -35,6 +41,7 @@ const styles = StyleSheet.create({
     text:{
         color: 'white',
         textAlign: 'center',
+        fontSize: 20,
     },
 });
 export default styles;

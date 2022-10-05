@@ -36,11 +36,11 @@ const Player = ({playerId}) => {
         <TouchableOpacity
           style={stylesGame.gameBtn}
           onPress={() => addLifePoint()}>
-          {/* <Image
-            source={require('../img/814208.png')}
+          <Image
+            source={require('../img/plus.png')}
             style={stylesGame.image}
-          /> */}
-          <Icon name="rocket" color="white" size={30} ></Icon>
+          />
+          {/* <Icon name="rocket" color="white" size={30} ></Icon> */}
         </TouchableOpacity>
       </View>
       <View style={player.color}>
@@ -52,7 +52,7 @@ const Player = ({playerId}) => {
           style={stylesGame.gameBtn}
           onPress={() => minusLifePoint()}>
           <Image
-            source={require('../img/149163.png')}
+            source={require('../img/minus.png')}
             style={stylesGame.image}
           />
         </TouchableOpacity>
