@@ -3,6 +3,7 @@ import {View, Text, TouchableOpacity, TextInput} from 'react-native';
 
 import stylesHome from '../styles/home';
 const Home = ({navigation}) => {
+  
   return (
     <View style={stylesHome.home}>
       <Text style={stylesHome.title}> Welcome to LifePoint counteur</Text>

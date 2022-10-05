@@ -6,15 +6,63 @@ import stylesPregame from '../styles/pregame';
 import stylesGame from '../styles/game';
 
 const Pregame = ({navigation}) => {
+
   let [firstPlayer, setFirstPlayer] = React.useState('');
   let [secondPlayer, setSecondPlayer] = React.useState('');
   let [thirdPlayer, setThirdPlayer] = React.useState('');
   let [fourthPlayer, setFourthPlayer] = React.useState('');
-  async function goToGame() {
+
+// Function to save players info and go to game screen
+  async function goToGame(nbPlayer) {
     if (firstPlayer != '' && secondPlayer != '') {
-      await AsyncStorage.setItem('Player1', JSON.stringify({lifePoint:'20', name:firstPlayer}));
-      await AsyncStorage.setItem('Player2', JSON.stringify({lifePoint:'20', name:secondPlayer}));
+      await AsyncStorage.setItem(     //AsyncStorage is like the localstorage but for mobile devices
+        'Player1',
+        JSON.stringify({
+          lifePoint: '20',
+          name: firstPlayer,
+          color: stylesGame.firstPart,
+        }),
+      );
+
+      await AsyncStorage.setItem(
+        'Player2',
+        JSON.stringify({
+          lifePoint: '20',
+          name: secondPlayer,
+          color: stylesGame.secondPart,
+        }),
+      );
+
+      await AsyncStorage.setItem('nbPlayer', '2');
+
+      if (thirdPlayer != '') {
+        await AsyncStorage.setItem(
+          'Player3',
+          JSON.stringify({
+            lifePoint: '20',
+            name: thirdPlayer,
+            color: stylesGame.thirdPart,
+          }),
+        );
+
+        await AsyncStorage.setItem('nbPlayer', '3');
+
+        if (fourthPlayer != '') {
+          await AsyncStorage.setItem(
+            'Player4',
+            JSON.stringify({
+              lifePoint: '20',
+              name: fourthPlayer,
+              color: stylesGame.fourthPart,
+            }),
+          );
+
+          await AsyncStorage.setItem('nbPlayer', '4');
+
+        }
+      }
       navigation.navigate('Game');
+
     } else {
       alert('Please enter atleat 2 players');
     }
@@ -29,25 +77,29 @@ const Pregame = ({navigation}) => {
         <Text> Put your nickname : </Text>
         <TextInput
           style={stylesPregame.textInput}
+          value={firstPlayer}
           placeholder="First Player"
-          onChangeText={(newText)=>setFirstPlayer(newText)}
+          onChangeText={newText => setFirstPlayer(newText)}
         />
         <TextInput
           style={stylesPregame.textInput}
+          value={secondPlayer}
           placeholder="Second Player"
-          onChangeText={(newText)=>setSecondPlayer(newText)}
+          onChangeText={newText => setSecondPlayer(newText)}
           editable={firstPlayer == '' ? false : true}
         />
         <TextInput
           style={stylesPregame.textInput}
+          value={thirdPlayer}
           placeholder="Third Player"
-          onChangeText={(newText)=>setThirdPlayer(newText)}
+          onChangeText={newText => setThirdPlayer(newText)}
           editable={secondPlayer == '' ? false : true}
         />
         <TextInput
           style={stylesPregame.textInput}
+          value={fourthPlayer}
           placeholder="Fourth Player"
-          onChangeText={(newText)=>setFourthPlayer(newText)}
+          onChangeText={newText => setFourthPlayer(newText)}
           editable={thirdPlayer == '' ? false : true}
         />
         <TouchableOpacity
@@ -56,6 +108,9 @@ const Pregame = ({navigation}) => {
           }}
           style={stylesPregame.startBtn}>
           <Text style={stylesPregame.text}>Start the game</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={stylesPregame.startBtn} onPress={()=>{navigation.navigate('Game')}}>
+          <Text style={stylesPregame.text}>Go back to game</Text>
         </TouchableOpacity>
       </View>
     </View>
