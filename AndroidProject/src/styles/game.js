@@ -1,26 +1,58 @@
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
-  container: {
+  main:{
+    flex: 3,
+  },
+  container2players : {
     flex: 1,
   },
+  container3players:{
+    flex: 2,
+    flexDirection: 'row',
+  },
+  container3players3:{
+    flex: 1,
+  },
+  container4players: {
+    flex: 1,
+    alignItems: 'stretch',
+  },
+
   firstPart: {
     flex: 1,
     backgroundColor: 'red',
+    width: 'auto',
+    height: 'auto',
   },
   secondPart: {
     flex: 1,
     backgroundColor: 'deepskyblue',
+    width: 'auto',
+    height: 'auto',
   },
-  gameBtn1: {
+  thirdPart:{
+    flex: 1,
+    backgroundColor: 'green',
+    width: 'auto',
+    height: 'auto',
+  },
+  fourthPart:{
+    flex: 1,
+    backgroundColor: 'brown',
+    width: 'auto',
+    height: 'auto',
+  },
+  gameBtn: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  gameBtn2: {
+  btnContainer:{
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    maxHeight: 50,
+    backgroundColor: 'black',
+    
   },
   player1: {
     flex: 2,
@@ -32,11 +64,11 @@ const styles = StyleSheet.create({
   text: {
     color: 'white',
     textAlign: 'center',
+    backgroundColor: 'black',
   },
   image: {
-    width: 60,
-    height: 60,
-
+    width: 50,
+    height: 50,
   },
 });
 export default styles;
