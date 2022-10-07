@@ -13,9 +13,9 @@ const Player = ({playerId, orientation}) => {
     const getPlayer = async () => {
       const player = await AsyncStorage.getItem('Player' + playerId);
       setPlayer(JSON.parse(player));
+      console.log(player);
     };
     getPlayer();
-
   }, []);
 
   const addLifePoint = () => {
@@ -33,7 +33,7 @@ const Player = ({playerId, orientation}) => {
   };
 
   return (
-    <View style={player.color}>
+    <View style={stylesGame.container}>
       <View style={player.color}>
         {orientation == 'bottom' && (
           <TouchableOpacity
@@ -76,11 +76,55 @@ const Player = ({playerId, orientation}) => {
           </TouchableOpacity>
         )}
       </View>
-      <View style={player.color}>
-        <Text style={stylesGame.player1}>{player.lifePoint}</Text>
 
-        <Modal playerName={player.name} orientation='right' commander={player.commanders} onPress={() => getCommander()} />
-      </View>
+
+      {orientation == 'right' && (
+        <View style={player.color}>
+          {/* <Text style={stylesGame.player2}>{player.lifePoint}</Text> */}
+          <Modal
+            playerName={player.name}
+            orientation="right"
+            damage={player.damage}
+            commander={player.commanders}
+            playerLP={player.lifePoint}
+            onPress={() => getCommander()}
+          />
+        </View>
+      )}
+      {orientation == 'left' && (
+          <View style={player.color}>
+            <Modal
+              playerName={player.name}
+              orientation="left"
+              commander={player.commanders}
+              playerLP={player.lifePoint}
+              onPress={() => getCommander()}
+            />
+          </View>
+        )}
+      {orientation == 'top' && (
+        <View style={player.color}>
+          <Modal
+            playerName={player.name}
+            orientation="top"
+            commander={player.commanders}
+            playerLP={player.lifePoint}
+            onPress={() => getCommander()}
+          />
+        </View>
+      )}
+      {orientation == 'bottom' && (
+        <View style={player.color}>
+          <Modal
+            playerName={player.name}
+            orientation="bottom"
+            commander={player.commanders}
+            playerLP={player.lifePoint}
+            onPress={() => getCommander()}
+          />
+        </View>
+      )}
+
       <View style={player.color}>
         {orientation == 'bottom' && (
           <TouchableOpacity

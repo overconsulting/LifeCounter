@@ -1,22 +1,17 @@
-import React,{useState} from 'react';
+import React, {useState} from 'react';
 import {View, Text, Pressable, Modal} from 'react-native';
 
-
 import stylesModal from '../styles/modal';
-const playerModal = ({playerName,commander,orientation}) => {
+const playerModal = ({playerName, commander, orientation, damage, playerLP}) => {
   const [modalVisible, setModalVisible] = useState(false);
-  
+
   return (
     <View>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-      >
+      <Modal animationType="slide" transparent={true} visible={modalVisible}>
         <View style={stylesModal.centeredView}>
           <View style={stylesModal.modalView}>
             <Text>{playerName}</Text>
-            <Text>commander : {commander}</Text>
+            <Text>{damage} : {commander}</Text>
             <Pressable onPress={() => setModalVisible(!modalVisible)}>
               <Text>Hide Modal</Text>
             </Pressable>
@@ -25,17 +20,30 @@ const playerModal = ({playerName,commander,orientation}) => {
       </Modal>
 
       <Pressable onPress={() => setModalVisible(true)}>
-        {/* {orientation == 'top' || orientation == 'bot' && (
-          <Text style={stylesModal.player1}>{playerName}</Text>
-        )}
-        {orientation == 'left' && (
-          <Text style={stylesModal.player2}>{playerName}</Text>
+        {orientation == 'bottom' && (
+            <View style={stylesModal.playerContainer2}>
+              <Text style={stylesModal.player1}>{playerLP}</Text>
+              <Text style={stylesModal.player1}>{playerName}</Text>
+            </View>
           )}
+          {orientation == 'top' && (
+            <View style={stylesModal.playerContainer2}>
+              <Text style={stylesModal.player1}>{playerName}</Text>
+              <Text style={stylesModal.player1}>{playerLP}</Text>
+            </View>
+          )}
+        {orientation == 'left' && (
+          <View style={stylesModal.playerContainer}>
+          <Text style={stylesModal.player2}>{playerName}</Text>
+          <Text style={stylesModal.player2}>{playerLP}</Text>
+        </View>
+        )}
         {orientation == 'right' && (
-          <Text style={stylesModal.player3}>{playerName}</Text>
-          )} */}
-
-        <Text style={stylesModal.player1}>{playerName}</Text>
+          <View style={stylesModal.playerContainer}>
+            <Text style={stylesModal.player3}>{playerLP}</Text>
+            <Text style={stylesModal.player3}>{playerName}</Text>
+          </View>
+        )}
       </Pressable>
     </View>
   );

@@ -21,6 +21,16 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center"
       },
+      playerContainer:{
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: 'row',
+      },
+      playerContainer2:{
+        justifyContent: "center",
+        alignItems: "center",
+      },
+
       player1: {
         color: 'white',
         textAlign: 'center',
@@ -32,7 +42,6 @@ const styles = StyleSheet.create({
         color: 'white',
         textAlign: 'center',
         fontSize: 30,
-        //flip the text vertically
         transform: [{rotate: '90deg'}],
         textAlignVertical: 'center',
       },
@@ -40,7 +49,6 @@ const styles = StyleSheet.create({
         color: 'white',
         textAlign: 'center',
         fontSize: 30,
-        //flip the text vertically
         transform: [{rotate: '270deg'}],
         textAlignVertical: 'center',
       },
@@ -50,7 +58,7 @@ const styles = StyleSheet.create({
         fontSize: 30,
         transform: [{rotate: '45deg'}],
         textAlignVertical: 'center',
-      }
+      },
 });
 
 export default styles;

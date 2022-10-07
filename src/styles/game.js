@@ -4,6 +4,11 @@ const styles = StyleSheet.create({
   main:{
     flex: 3,
   },
+  container:{
+    flex: 1,
+    alignItems: 'stretch',
+    justifyContent: 'center',
+  },
   container2players : {
     flex: 1,
   },
@@ -73,6 +78,13 @@ const styles = StyleSheet.create({
 
     fontSize: 30,
     textAlignVertical: 'center',
+  },
+  player2:{
+    flex: 2,
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 30,
+    transform: [{rotate: '270deg'}],
   },
   text: {
     color: 'white',

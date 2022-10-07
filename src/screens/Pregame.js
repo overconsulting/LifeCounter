@@ -21,7 +21,8 @@ const Pregame = ({navigation}) => {
           lifePoint: '40',
           name: firstPlayer,
           color: stylesGame.firstPart,
-          commanders: [2,3,4],
+          commanders: [2 , 3 , 4],
+          damageCommanders: [0 , 0 , 0],
         }),
       );
 
@@ -32,6 +33,7 @@ const Pregame = ({navigation}) => {
           name: secondPlayer,
           color: stylesGame.secondPart,
           commanders: [1,3,4],
+          damageCommanders: [0 , 0 , 0],
         }),
       );
 
@@ -45,6 +47,7 @@ const Pregame = ({navigation}) => {
             name: thirdPlayer,
             color: stylesGame.thirdPart,
             commanders: [1,2,4],
+            damageCommanders: [0 , 0 , 0],
           }),
         );
 
@@ -58,6 +61,7 @@ const Pregame = ({navigation}) => {
               name: fourthPlayer,
               color: stylesGame.fourthPart,
               commanders: [1,2,3],
+              damageCommanders: [0 , 0 , 0],
             }),
           );
 
