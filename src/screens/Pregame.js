@@ -21,7 +21,7 @@ const Pregame = ({navigation}) => {
           lifePoint: '40',
           name: firstPlayer,
           color: stylesGame.firstPart,
-          commanders : {commander2:2, commander3:3,commander3: 4},
+          commanders: {commander2: '2', commander3: '3',commander4: '4'},
         }),
       );
 
@@ -31,7 +31,7 @@ const Pregame = ({navigation}) => {
           lifePoint: '40',
           name: secondPlayer,
           color: stylesGame.secondPart,
-          commanders: {commander1: 1, commander3: 3, commander4: 4},
+          commanders: {commander1: '1', commander3: '3', commander4: '4'},
         }),
       );
 
@@ -44,7 +44,7 @@ const Pregame = ({navigation}) => {
             lifePoint: '40',
             name: thirdPlayer,
             color: stylesGame.thirdPart,
-            commanders: {commander1: 1, commander2: 2, commander4: 4},
+            commanders: {commander1: '1', commander2: '2', commander4: '4'},
           }),
         );
 
@@ -57,6 +57,7 @@ const Pregame = ({navigation}) => {
               lifePoint: '40',
               name: fourthPlayer,
               color: stylesGame.fourthPart,
+              commanders: {commander1: '1', commander2: '2', commander3: '3'},
             }),
           );
 
@@ -115,6 +116,9 @@ const Pregame = ({navigation}) => {
         </TouchableOpacity>
         <TouchableOpacity style={stylesPregame.startBtn} onPress={()=>{navigation.navigate('Game')}}>
           <Text style={stylesPregame.text}>Go back to game</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={stylesPregame.startBtn} onPress={()=>{navigation.navigate('Home')}}>
+          <Text style={stylesPregame.text}>Go back to home</Text>
         </TouchableOpacity>
       </View>
     </View>

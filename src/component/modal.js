@@ -3,9 +3,9 @@ import {View, Text, Pressable, Modal} from 'react-native';
 
 
 import stylesModal from '../styles/modal';
-const playerModal = ({playerName}) => {
+const playerModal = ({playerName,commander}) => {
   const [modalVisible, setModalVisible] = useState(false);
-
+  
   return (
     <View>
       <Modal
@@ -16,6 +16,7 @@ const playerModal = ({playerName}) => {
         <View style={stylesModal.centeredView}>
           <View style={stylesModal.modalView}>
             <Text>{playerName}</Text>
+            <Text>{commander}</Text>
             <Pressable onPress={() => setModalVisible(!modalVisible)}>
               <Text>Hide Modal</Text>
             </Pressable>
@@ -24,7 +25,7 @@ const playerModal = ({playerName}) => {
       </Modal>
 
       <Pressable onPress={() => setModalVisible(true)}>
-        <Text style={stylesModal.player2}>{playerName}</Text>
+        <Text style={stylesModal.player1}>{playerName}</Text>
       </Pressable>
     </View>
   );

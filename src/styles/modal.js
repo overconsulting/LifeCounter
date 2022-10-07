@@ -19,12 +19,12 @@ const styles = StyleSheet.create({
       centeredView: {
         flex: 1,
         justifyContent: "center",
-        alignItems: "center",
-        marginTop: 22
+        alignItems: "center"
       },
       player1: {
         color: 'white',
         textAlign: 'center',
+        margin: 10,
         fontSize: 30,
         textAlignVertical: 'center',
       },

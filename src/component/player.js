@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, TouchableOpacity, Image} from 'react-native';
+import {View, Text, TouchableOpacity, Image, Pressable} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -8,6 +8,10 @@ import Modal from './modal';
 
 const Player = ({playerId}) => {
   const [player, setPlayer] = useState('');
+  const [commander1, setCommander1] = useState('');
+  const [commander2, setCommander2] = useState('');
+  const [commander3, setCommander3] = useState('');
+  const [commander4, setCommander4] = useState('');
 
   useEffect(() => {
     const getPlayer = async () => {
@@ -15,7 +19,19 @@ const Player = ({playerId}) => {
       setPlayer(JSON.parse(players));
     };
     getPlayer();
+    // getCommander();
   }, []);
+
+  const getCommander = () => {
+    console.log(player.commanders);
+    let commander = '';
+    for (const [key, value] of Object.entries(player.commanders)) {
+      commander = commander + key + ' : ' + value + ' ';
+      console.log(`${key}: ${value}`);
+    }
+    setCommander1(commander);
+    console.log(commander1);
+  };
 
   const addLifePoint = () => {
     let lifePoint = player.lifePoint;
@@ -40,11 +56,14 @@ const Player = ({playerId}) => {
           <Image source={require('../img/plus.png')} style={stylesGame.image} />
           {/* <Icon name="rocket" color="white" size={30} ></Icon> */}
         </TouchableOpacity>
+        <Text style={stylesGame.player1} onPress={() => getCommander()}>Get commander</Text>
       </View>
       <View style={player.color}>
         <Text style={stylesGame.player1}>{player.lifePoint}</Text>
-        {/* <Text style={stylesGame.player1}>{player.name}</Text> */}
-        <Modal playerName={player.name}/>
+        {/* <Text style={stylesGame.player1} onPress={() => getCommander()}>
+          {player.name} {commander1}
+        </Text> */}
+        <Modal playerName={player.name} commander={commander1}  onPress={() => getCommander()}/>
       </View>
       <View style={player.color}>
         <TouchableOpacity
@@ -56,7 +75,7 @@ const Player = ({playerId}) => {
           />
         </TouchableOpacity>
       </View>
-      <Modal/>
+      <Modal />
     </View>
   );
 };

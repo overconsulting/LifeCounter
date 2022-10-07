@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   container3players3:{
-    flex: 1,
+    flex: 2,
   },
   container4players: {
     flex: 1,
@@ -61,19 +61,11 @@ const styles = StyleSheet.create({
     
   },
   player1: {
-    flex: 3,
-    color: 'white',
-    textAlign: 'center',
-    fontSize: 30,
-    textAlignVertical: 'center',
-  },
-  player2:{
     flex: 2,
     color: 'white',
     textAlign: 'center',
+
     fontSize: 30,
-    //flip the text vertically
-    transform: [{rotate: '180deg'}],
     textAlignVertical: 'center',
   },
   text: {
