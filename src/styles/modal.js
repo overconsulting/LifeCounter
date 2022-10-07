@@ -72,6 +72,23 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 30,
       },
+      image:{
+        width: 50,
+        height: 50,
+      },
+      gameBtn:{
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: 10,
+      },
+      gameBtn2:{
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      btnContainer:{
+        flexDirection: 'row',
+        padding: 10,
+      },
 });
 
 export default styles;

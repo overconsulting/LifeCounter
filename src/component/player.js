@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, TouchableOpacity, Image, Pressable} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Icon from 'react-native-vector-icons/FontAwesome';
+
 
 import stylesGame from '../styles/game';
 import Modal from './modal';
@@ -11,9 +11,13 @@ const Player = ({playerId, orientation}) => {
 
   useEffect(() => {
     const getPlayer = async () => {
-      const player = await AsyncStorage.getItem('Player' + playerId);
-      setPlayer(JSON.parse(player));
-      console.log(player);
+      const players = await AsyncStorage.getItem('Player' + playerId);
+      // console.log(await AsyncStorage.getAllKeys());
+      setPlayer(JSON.parse(players));
+      // const commander = (player.commanders).map((card, index) => {
+      //   console.log(card + ' ' + index);
+      // });
+      // console.log(commander);
     };
     getPlayer();
   }, []);
@@ -33,6 +37,8 @@ const Player = ({playerId, orientation}) => {
   };
 
   return (
+
+    // button orientation 
     <View style={stylesGame.container}>
       <View style={player.color}>
         {orientation == 'bottom' && (
@@ -77,10 +83,10 @@ const Player = ({playerId, orientation}) => {
         )}
       </View>
 
-
+{/* Modal orientation  */}
       {orientation == 'right' && (
         <View style={player.color}>
-          {/* <Text style={stylesGame.player2}>{player.lifePoint}</Text> */}
+
           <Modal
             playerName={player.name}
             orientation="right"
@@ -125,6 +131,7 @@ const Player = ({playerId, orientation}) => {
         </View>
       )}
 
+{/* button opacity */}
       <View style={player.color}>
         {orientation == 'bottom' && (
           <TouchableOpacity
@@ -155,11 +162,11 @@ const Player = ({playerId, orientation}) => {
               style={stylesGame.image}
             />
           </TouchableOpacity>
-        )}
+        )} 
         {orientation == 'left' && (
           <TouchableOpacity
             style={stylesGame.gameBtn2}
-            onPress={() => addLifePoint()}>
+            onPress={() =>addLifePoint()}>
             <Image
               source={require('../img/plus.png')}
               style={stylesGame.image}
