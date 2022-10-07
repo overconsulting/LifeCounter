@@ -7,17 +7,33 @@ const playerModal = ({playerName, commander, orientation, damage, playerLP}) => 
 
   return (
     <View>
-      <Modal animationType="slide" transparent={true} visible={modalVisible}>
-        <View style={stylesModal.centeredView}>
+      {orientation == 'right' && (
+           <Modal animationType="slide" transparent={true} visible={modalVisible}>
+           <View style={stylesModal.rightView}>
+             <View style={stylesModal.modalView}>
+               <Text style={stylesModal.text}>{playerName}</Text>
+               <Text style={stylesModal.text}>{damage} : {commander}</Text>
+               <Pressable onPress={() => setModalVisible(!modalVisible)}>
+                 <Text style={stylesModal.text}>Hide Modal</Text>
+               </Pressable>
+             </View>
+           </View>
+         </Modal>
+        )}
+      {orientation == 'left' && (
+        <Modal animationType="slide" transparent={true} visible={modalVisible}>
+        <View style={stylesModal.leftView}>
           <View style={stylesModal.modalView}>
-            <Text>{playerName}</Text>
-            <Text>{damage} : {commander}</Text>
+            <Text style={stylesModal.text}>{playerName}</Text>
+            <Text style={stylesModal.text}>{damage} : {commander}</Text>
             <Pressable onPress={() => setModalVisible(!modalVisible)}>
-              <Text>Hide Modal</Text>
+              <Text style={stylesModal.text}>Hide Modal</Text>
             </Pressable>
           </View>
         </View>
       </Modal>
+      )}
+   
 
       <Pressable onPress={() => setModalVisible(true)}>
         {orientation == 'bottom' && (

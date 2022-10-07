@@ -2,10 +2,9 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
     modalView: {
-        margin: 20,
         backgroundColor: "white",
         borderRadius: 20,
-        padding: 35,
+        padding: 50,
         alignItems: "center",
         shadowColor: "#000",
         shadowOffset: {
@@ -16,10 +15,19 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 5
       },
-      centeredView: {
+      rightView: {
         flex: 1,
+        padding: 50,
         justifyContent: "center",
-        alignItems: "center"
+        alignContent: "flex-end",
+        transform: [{rotate: '270deg'}],
+      },
+      leftView:{
+        flex: 1,
+        padding: 50,
+        justifyContent: "center",
+        alignContent: "flex-end",
+        transform: [{rotate: '90deg'}],
       },
       playerContainer:{
         justifyContent: "center",
@@ -58,6 +66,11 @@ const styles = StyleSheet.create({
         fontSize: 30,
         transform: [{rotate: '45deg'}],
         textAlignVertical: 'center',
+      },
+      text:{
+        color: 'black',
+        textAlign: 'center',
+        fontSize: 30,
       },
 });
 
