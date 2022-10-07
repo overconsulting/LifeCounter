@@ -20,7 +20,7 @@ const Game = ({navigation}) => {
       return (
         <View style={stylesGame.main}>
           <View style={stylesGame.container2players}>
-            <Player playerId="1" />
+            <Player playerId="1" orientation='top' />
           </View>
           <View style={stylesGame.btnContainer}>
             <TouchableOpacity
@@ -32,7 +32,7 @@ const Game = ({navigation}) => {
             </TouchableOpacity>
           </View>
           <View style={stylesGame.container2players}>
-            <Player playerId="2" />
+            <Player playerId="2" orientation='bottom'/>
           </View>
         </View>
       );
@@ -40,8 +40,8 @@ const Game = ({navigation}) => {
       return (
         <View style={stylesGame.container4players}>
           <View style={stylesGame.container3players}>
-            <Player playerId="1" />
-            <Player playerId="2" />
+            <Player playerId="1" orientation='top'/>
+            <Player playerId="2" orientation='top'/>
           </View>
           <View style={stylesGame.btnContainer}>
             <TouchableOpacity
@@ -53,7 +53,7 @@ const Game = ({navigation}) => {
             </TouchableOpacity>
           </View>
           <View style={stylesGame.container3players3}>
-            <Player playerId="3" />
+            <Player playerId="3" orientation='bottom'/>
           </View>
         </View>
       );
@@ -61,8 +61,8 @@ const Game = ({navigation}) => {
       return (
         <View style={stylesGame.container4players}>
           <View style={stylesGame.container3players}>
-            <Player playerId="1" />
-            <Player playerId="2" />
+            <Player playerId="1" orientation='left'/>
+            <Player playerId="2" orientation = 'right'/>
           </View>
           <View style={stylesGame.btnContainer}>
             <TouchableOpacity
@@ -74,8 +74,8 @@ const Game = ({navigation}) => {
             </TouchableOpacity>
           </View>
           <View style={stylesGame.container3players}>
-            <Player playerId="3" />
-            <Player playerId="4" />
+            <Player playerId="3" orientation='left'/>
+            <Player playerId="4" orientation = 'right'/>
           </View>
         </View>
       );

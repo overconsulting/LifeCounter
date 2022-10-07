@@ -36,6 +36,14 @@ const styles = StyleSheet.create({
         transform: [{rotate: '90deg'}],
         textAlignVertical: 'center',
       },
+      player3:{
+        color: 'white',
+        textAlign: 'center',
+        fontSize: 30,
+        //flip the text vertically
+        transform: [{rotate: '270deg'}],
+        textAlignVertical: 'center',
+      },
       playerRight:{
         color: 'white',
         textAlign: 'center',

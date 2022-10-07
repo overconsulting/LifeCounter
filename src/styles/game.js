@@ -48,6 +48,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  gameBtn2:{
+    flex: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    transform: [{rotate: '90deg'}],
+  },
   addDeleteBtnContainer1:{
     flex: 1,
     backgroundColor: 'red',

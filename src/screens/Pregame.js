@@ -21,7 +21,7 @@ const Pregame = ({navigation}) => {
           lifePoint: '40',
           name: firstPlayer,
           color: stylesGame.firstPart,
-          commanders: {commander2: '2', commander3: '3',commander4: '4'},
+          commanders: [2,3,4],
         }),
       );
 
@@ -31,7 +31,7 @@ const Pregame = ({navigation}) => {
           lifePoint: '40',
           name: secondPlayer,
           color: stylesGame.secondPart,
-          commanders: {commander1: '1', commander3: '3', commander4: '4'},
+          commanders: [1,3,4],
         }),
       );
 
@@ -44,7 +44,7 @@ const Pregame = ({navigation}) => {
             lifePoint: '40',
             name: thirdPlayer,
             color: stylesGame.thirdPart,
-            commanders: {commander1: '1', commander2: '2', commander4: '4'},
+            commanders: [1,2,4],
           }),
         );
 
@@ -57,7 +57,7 @@ const Pregame = ({navigation}) => {
               lifePoint: '40',
               name: fourthPlayer,
               color: stylesGame.fourthPart,
-              commanders: {commander1: '1', commander2: '2', commander3: '3'},
+              commanders: [1,2,3],
             }),
           );
 

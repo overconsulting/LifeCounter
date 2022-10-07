@@ -3,7 +3,7 @@ import {View, Text, Pressable, Modal} from 'react-native';
 
 
 import stylesModal from '../styles/modal';
-const playerModal = ({playerName,commander}) => {
+const playerModal = ({playerName,commander,orientation}) => {
   const [modalVisible, setModalVisible] = useState(false);
   
   return (
@@ -16,7 +16,7 @@ const playerModal = ({playerName,commander}) => {
         <View style={stylesModal.centeredView}>
           <View style={stylesModal.modalView}>
             <Text>{playerName}</Text>
-            <Text>{commander}</Text>
+            <Text>commander : {commander}</Text>
             <Pressable onPress={() => setModalVisible(!modalVisible)}>
               <Text>Hide Modal</Text>
             </Pressable>
@@ -25,6 +25,16 @@ const playerModal = ({playerName,commander}) => {
       </Modal>
 
       <Pressable onPress={() => setModalVisible(true)}>
+        {/* {orientation == 'top' || orientation == 'bot' && (
+          <Text style={stylesModal.player1}>{playerName}</Text>
+        )}
+        {orientation == 'left' && (
+          <Text style={stylesModal.player2}>{playerName}</Text>
+          )}
+        {orientation == 'right' && (
+          <Text style={stylesModal.player3}>{playerName}</Text>
+          )} */}
+
         <Text style={stylesModal.player1}>{playerName}</Text>
       </Pressable>
     </View>
