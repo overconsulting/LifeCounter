@@ -20,33 +20,39 @@ const styles = StyleSheet.create({
   },
 
   firstPart: {
-    flex: 1,
+    flex: 2,
     backgroundColor: 'red',
     width: 'auto',
     height: 'auto',
   },
   secondPart: {
-    flex: 1,
+    flex: 2,
     backgroundColor: 'deepskyblue',
     width: 'auto',
     height: 'auto',
   },
   thirdPart:{
-    flex: 1,
+    flex: 2,
     backgroundColor: 'green',
     width: 'auto',
     height: 'auto',
   },
   fourthPart:{
-    flex: 1,
+    flex: 2,
     backgroundColor: 'brown',
     width: 'auto',
     height: 'auto',
   },
   gameBtn: {
-    flex: 1,
+    flex: 2,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  addDeleteBtnContainer1:{
+    flex: 1,
+    backgroundColor: 'red',
+    width: 'auto',
+    height: 'auto',
   },
   btnContainer:{
     flex: 1,
@@ -55,10 +61,19 @@ const styles = StyleSheet.create({
     
   },
   player1: {
+    flex: 3,
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 30,
+    textAlignVertical: 'center',
+  },
+  player2:{
     flex: 2,
     color: 'white',
     textAlign: 'center',
     fontSize: 30,
+    //flip the text vertically
+    transform: [{rotate: '180deg'}],
     textAlignVertical: 'center',
   },
   text: {

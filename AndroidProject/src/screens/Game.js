@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, TouchableOpacity, Text} from 'react-native';
+import {View, TouchableOpacity, Text, Modal, Pressable} from 'react-native';
 
 //shared preferences / crypted
 import stylesGame from '../styles/game';
@@ -7,7 +7,6 @@ import Player from '../component/player';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 const Game = ({navigation}) => {
   const [nbPlayer, setNbPlayer] = useState('');
-
   useEffect(() => {
     const getNbPlayer = async () => {
       const nbPlayer = await AsyncStorage.getItem('nbPlayer');

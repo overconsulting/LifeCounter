@@ -4,6 +4,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import stylesGame from '../styles/game';
+import Modal from './modal';
+
 const Player = ({playerId}) => {
   const [player, setPlayer] = useState('');
 
@@ -29,23 +31,20 @@ const Player = ({playerId}) => {
     AsyncStorage.setItem('Player' + playerId, JSON.stringify(player));
   };
 
-
   return (
     <View style={player.color}>
       <View style={player.color}>
         <TouchableOpacity
           style={stylesGame.gameBtn}
           onPress={() => addLifePoint()}>
-          <Image
-            source={require('../img/plus.png')}
-            style={stylesGame.image}
-          />
+          <Image source={require('../img/plus.png')} style={stylesGame.image} />
           {/* <Icon name="rocket" color="white" size={30} ></Icon> */}
         </TouchableOpacity>
       </View>
       <View style={player.color}>
         <Text style={stylesGame.player1}>{player.lifePoint}</Text>
-        <Text style={stylesGame.player1}>{player.name}</Text>
+        {/* <Text style={stylesGame.player1}>{player.name}</Text> */}
+        <Modal playerName={player.name}/>
       </View>
       <View style={player.color}>
         <TouchableOpacity
@@ -57,6 +56,7 @@ const Player = ({playerId}) => {
           />
         </TouchableOpacity>
       </View>
+      <Modal/>
     </View>
   );
 };

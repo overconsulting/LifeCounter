@@ -13,23 +13,25 @@ const Pregame = ({navigation}) => {
   let [fourthPlayer, setFourthPlayer] = React.useState('');
 
 // Function to save players info and go to game screen
-  async function goToGame(nbPlayer) {
+  async function goToGame() {
     if (firstPlayer != '' && secondPlayer != '') {
       await AsyncStorage.setItem(     //AsyncStorage is like the localstorage but for mobile devices
         'Player1',
         JSON.stringify({
-          lifePoint: '20',
+          lifePoint: '40',
           name: firstPlayer,
           color: stylesGame.firstPart,
+          commanders : {commander2:2, commander3:3,commander3: 4},
         }),
       );
 
       await AsyncStorage.setItem(
         'Player2',
         JSON.stringify({
-          lifePoint: '20',
+          lifePoint: '40',
           name: secondPlayer,
           color: stylesGame.secondPart,
+          commanders: {commander1: 1, commander3: 3, commander4: 4},
         }),
       );
 
@@ -39,9 +41,10 @@ const Pregame = ({navigation}) => {
         await AsyncStorage.setItem(
           'Player3',
           JSON.stringify({
-            lifePoint: '20',
+            lifePoint: '40',
             name: thirdPlayer,
             color: stylesGame.thirdPart,
+            commanders: {commander1: 1, commander2: 2, commander4: 4},
           }),
         );
 
@@ -51,7 +54,7 @@ const Pregame = ({navigation}) => {
           await AsyncStorage.setItem(
             'Player4',
             JSON.stringify({
-              lifePoint: '20',
+              lifePoint: '40',
               name: fourthPlayer,
               color: stylesGame.fourthPart,
             }),
