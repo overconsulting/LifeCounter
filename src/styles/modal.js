@@ -15,6 +15,19 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 5
       },
+      topView:{
+        flex: 1,
+        padding: 50,
+        justifyContent: "center",
+        alignItems: "center",
+        transform: [{ rotate: '180deg'}],
+      },
+      bottomView:{
+        flex: 1,
+        padding: 50,
+        justifyContent: "center",
+        alignItems: "center",
+      },
       rightView: {
         flex: 1,
         padding: 50,
@@ -38,13 +51,20 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
       },
-
+      player:{
+        color: 'white',
+        textAlign: 'center',
+        margin: 10,
+        fontSize: 30,
+        textAlignVertical: 'center',
+      },
       player1: {
         color: 'white',
         textAlign: 'center',
         margin: 10,
         fontSize: 30,
         textAlignVertical: 'center',
+        transform:[{rotate: '180deg'}],
       },
       player2:{
         color: 'white',
@@ -71,6 +91,7 @@ const styles = StyleSheet.create({
         color: 'black',
         textAlign: 'center',
         fontSize: 30,
+        margin: 10,
       },
       image:{
         width: 50,

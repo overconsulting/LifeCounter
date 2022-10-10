@@ -40,8 +40,8 @@ const Game = ({navigation}) => {
       return (
         <View style={stylesGame.container4players}>
           <View style={stylesGame.container3players}>
-            <Player playerId="1" orientation='top'/>
-            <Player playerId="2" orientation='top'/>
+            <Player playerId="1" orientation='left'/>
+            <Player playerId="2" orientation='right'/>
           </View>
           <View style={stylesGame.btnContainer}>
             <TouchableOpacity
