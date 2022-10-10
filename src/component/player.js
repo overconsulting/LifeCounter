@@ -12,15 +12,18 @@ const Player = ({playerId, orientation}) => {
   useEffect(() => {
     const getPlayer = async () => {
       const players = await AsyncStorage.getItem('Player' + playerId);
-      // console.log(await AsyncStorage.getAllKeys());
       setPlayer(JSON.parse(players));
-      // const commander = (player.commanders).map((card, index) => {
-      //   console.log(card + ' ' + index);
-      // });
-      // console.log(commander);
+      console.log(players);
     };
     getPlayer();
   }, []);
+  
+  const getCommander = () =>{
+    let commander = player.commanders;
+    commander.map((command)=>{
+      console.log(command);
+    })
+  };
 
   const addLifePoint = () => {
     let lifePoint = player.lifePoint;
@@ -38,13 +41,13 @@ const Player = ({playerId, orientation}) => {
 
   return (
 
-    // button orientation 
+    // button orientation
     <View style={stylesGame.container}>
-      <View style={player.color}>
+      <View style={[player.style, {backgroundColor: player.color}]}>
         {orientation == 'bottom' && (
           <TouchableOpacity
             style={stylesGame.gameBtn}
-            onPress={() => addLifePoint()}>
+            onPress={() => {addLifePoint(),getCommander()}}>
             <Image
               source={require('../img/plus.png')}
               style={stylesGame.image}
@@ -85,12 +88,12 @@ const Player = ({playerId, orientation}) => {
 
 {/* Modal orientation  */}
       {orientation == 'right' && (
-        <View style={player.color}>
+        <View style={[player.style, {backgroundColor: player.color}]}>
 
           <Modal
             playerName={player.name}
             orientation="right"
-            damage={player.damage}
+            damage={player.damageCommanders}
             commander={player.commanders}
             playerLP={player.lifePoint}
             onPress={() => getCommander()}
@@ -98,10 +101,11 @@ const Player = ({playerId, orientation}) => {
         </View>
       )}
       {orientation == 'left' && (
-          <View style={player.color}>
+          <View style={[player.style, {backgroundColor: player.color}]}>
             <Modal
               playerName={player.name}
               orientation="left"
+              damage={player.damageCommanders}
               commander={player.commanders}
               playerLP={player.lifePoint}
               onPress={() => getCommander()}
@@ -109,10 +113,11 @@ const Player = ({playerId, orientation}) => {
           </View>
         )}
       {orientation == 'top' && (
-        <View style={player.color}>
+        <View style={[player.style, {backgroundColor: player.color}]}>
           <Modal
             playerName={player.name}
             orientation="top"
+            damage={player.damageCommanders}
             commander={player.commanders}
             playerLP={player.lifePoint}
             onPress={() => getCommander()}
@@ -120,10 +125,11 @@ const Player = ({playerId, orientation}) => {
         </View>
       )}
       {orientation == 'bottom' && (
-        <View style={player.color}>
+        <View style={[player.style, {backgroundColor: player.color}]}>
           <Modal
             playerName={player.name}
             orientation="bottom"
+            damage={player.damageCommanders}
             commander={player.commanders}
             playerLP={player.lifePoint}
             onPress={() => getCommander()}
@@ -132,7 +138,7 @@ const Player = ({playerId, orientation}) => {
       )}
 
 {/* button opacity */}
-      <View style={player.color}>
+      <View style={[player.style, {backgroundColor: player.color}]}>
         {orientation == 'bottom' && (
           <TouchableOpacity
             style={stylesGame.gameBtn}

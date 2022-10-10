@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
         height: 40,
         fontSize: 20,
         textAlign: 'center',
-        margin: 10,
+        margin: 20,
         color: 'black',
     },
     buttonContainer:{
@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
     text:{
         color: 'white',
         textAlign: 'center',
+        padding: 5,
         fontSize: 20,
     },
     inputContainer:{
@@ -57,12 +58,19 @@ const styles = StyleSheet.create({
     //Modal of pregame 
     btnColor:{
         backgroundColor: 'red',
+        borderRadius: 20,
+    },
+    textColor:{
+        color: 'black',
+        textAlign: 'center',
+        padding: 5,
+        fontSize: 20,
     },
     btn:{
         alignItems: 'flex-end',
     },
     btnText:{
-        padding: 10,
+        padding: 15,
         color: 'white',
     },
     modalPosition:{

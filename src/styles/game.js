@@ -9,6 +9,9 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     justifyContent: 'center',
   },
+  playerContainer:{
+    backgroundColor: 'white',
+  },
   container2players : {
     flex: 1,
   },

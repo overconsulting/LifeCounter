@@ -14,14 +14,15 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import stylesPregame from '../styles/pregame';
 import stylesGame from '../styles/game';
 
-const Pregame = ({navigation}, thePlayer) => {
+const Pregame = ({navigation}) => {
   const [firstPlayer, setFirstPlayer] = useState('');
   const [secondPlayer, setSecondPlayer] = useState('');
   const [thirdPlayer, setThirdPlayer] = useState('');
   const [fourthPlayer, setFourthPlayer] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
+  const [key, setKey] = useState('');
   const [buttonColorPlayer1, setButtonColorPlayer1] = useState('#dc143c');
-  const [buttonColorPlayer2, setButtonColorPlayer2] = useState('#00008b');
+  const [buttonColorPlayer2, setButtonColorPlayer2] = useState('#87cefa');
   const [buttonColorPlayer3, setButtonColorPlayer3] = useState('#006400');
   const [buttonColorPlayer4, setButtonColorPlayer4] = useState('#800000');
 
@@ -34,7 +35,8 @@ const Pregame = ({navigation}, thePlayer) => {
         JSON.stringify({
           lifePoint: '40',
           name: firstPlayer,
-          color: stylesGame.firstPart,
+          style: stylesGame.firstPart,
+          color: buttonColorPlayer1,
           commanders: [2, 3, 4],
           damageCommanders: [0, 0, 0],
         }),
@@ -45,7 +47,8 @@ const Pregame = ({navigation}, thePlayer) => {
         JSON.stringify({
           lifePoint: '40',
           name: secondPlayer,
-          color: stylesGame.secondPart,
+          style: stylesGame.secondPart,
+          color: buttonColorPlayer2,
           commanders: [1, 3, 4],
           damageCommanders: [0, 0, 0],
         }),
@@ -59,7 +62,8 @@ const Pregame = ({navigation}, thePlayer) => {
           JSON.stringify({
             lifePoint: '40',
             name: thirdPlayer,
-            color: stylesGame.thirdPart,
+            style: stylesGame.thirdPart,
+            color: buttonColorPlayer3,
             commanders: [1, 2, 4],
             damageCommanders: [0, 0, 0],
           }),
@@ -73,7 +77,8 @@ const Pregame = ({navigation}, thePlayer) => {
             JSON.stringify({
               lifePoint: '40',
               name: fourthPlayer,
-              color: stylesGame.fourthPart,
+              style: stylesGame.fourthPart,
+              color: buttonColorPlayer4,
               commanders: [1, 2, 3],
               damageCommanders: [0, 0, 0],
             }),
@@ -86,14 +91,40 @@ const Pregame = ({navigation}, thePlayer) => {
     } else {
       alert('Please enter atleat 2 players');
     }
-
   }
+  
+  const changeColor = (colors, key) => {
+    if (key == 1) {
+      setButtonColorPlayer1(colors);
+      console.log(buttonColorPlayer1);
+    } else if (key == 2) {
+      setButtonColorPlayer2(colors);
+      console.log(buttonColorPlayer2);
+    } else if (key == 3) {
+      setButtonColorPlayer3(colors);
+      console.log(buttonColorPlayer3);
+    } else if (key == 4) {
+      setButtonColorPlayer4(colors);
+      console.log(buttonColorPlayer4);
+    } else {
+      alert('Something went wrong');
+      console.log(key);
+    }
+  };
+
 
   return (
     <ImageBackground
       source={require('../img/bg3.jpg')}
       style={stylesPregame.bg}>
-      <Modal animationType="slide" transparent={true} visible={modalVisible}>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.');
+          setModalVisible(!modalVisible);
+        }}>
         <View style={stylesPregame.modalPosition}>
           <View style={stylesPregame.modalView}>
             <View style={stylesPregame.btn}>
@@ -108,13 +139,12 @@ const Pregame = ({navigation}, thePlayer) => {
 
               <ColorPicker
                 onColorChangeComplete={color => {
-                  console.log(color)
+                  console.log(color), changeColor(color, key);
                 }}
                 sliderHidden={true}
                 swatches={false}
                 thumbSize={30}
               />
-
             </View>
           </View>
         </View>
@@ -143,9 +173,9 @@ const Pregame = ({navigation}, thePlayer) => {
                 {backgroundColor: buttonColorPlayer1},
               ]}
               onPress={() => {
-                setModalVisible(true), console.log('ok');
+                setModalVisible(true), console.log('ok'), setKey(1);
               }}>
-              <Text style={stylesPregame.text}>Color</Text>
+              <Text style={stylesPregame.textColor}>Color</Text>
             </TouchableOpacity>
           </View>
 
@@ -163,9 +193,9 @@ const Pregame = ({navigation}, thePlayer) => {
                 {backgroundColor: buttonColorPlayer2},
               ]}
               onPress={() => {
-                setModalVisible(true), console.log('ok');
+                setModalVisible(true), console.log('ok'), setKey(2);
               }}>
-              <Text style={stylesPregame.text}>Color</Text>
+              <Text style={stylesPregame.textColor}>Color</Text>
             </TouchableOpacity>
           </View>
 
@@ -183,9 +213,9 @@ const Pregame = ({navigation}, thePlayer) => {
                 {backgroundColor: buttonColorPlayer3},
               ]}
               onPress={() => {
-                setModalVisible(true), console.log('ok');
+                setModalVisible(true), console.log('ok'), setKey(3);
               }}>
-              <Text style={stylesPregame.text}>Color</Text>
+              <Text style={stylesPregame.textColor}>Color</Text>
             </TouchableOpacity>
           </View>
 
@@ -203,9 +233,9 @@ const Pregame = ({navigation}, thePlayer) => {
                 {backgroundColor: buttonColorPlayer4},
               ]}
               onPress={() => {
-                setModalVisible(true), console.log('ok');
+                setModalVisible(true), console.log('ok'), setKey(4);
               }}>
-              <Text style={stylesPregame.text}>Color</Text>
+              <Text style={stylesPregame.textColor}>Color</Text>
             </TouchableOpacity>
           </View>
 
@@ -232,7 +262,6 @@ const Pregame = ({navigation}, thePlayer) => {
               }}>
               <Text style={stylesPregame.text}>Go back to home</Text>
             </TouchableOpacity>
-            
           </View>
         </View>
       </View>
