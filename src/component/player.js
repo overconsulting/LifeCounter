@@ -1,67 +1,32 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, TouchableOpacity, Image, Pressable} from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
+
+import {useSelector, useDispatch} from 'react-redux';
+import { decrementLifePoint, incrementLifePoint } from '../slices/game';
 
 import stylesGame from '../styles/game';
 import Modal from './modal';
 
 const Player = ({playerId, orientation}) => {
-  const [player, setPlayer] = useState('');
-  const [theCommander, setTheCommander] = useState('');
-
-
-  useEffect(() => {
-    const getPlayer = async () => {
-      const players = await AsyncStorage.getItem('Player' + playerId);
-      setPlayer(JSON.parse(players));
-      console.log(players);
-    };
-    getPlayer();
-  }, []);
   
-  // const getCommander = () =>{
-  //   let commander = player.commanders;
-  //   // let damage = player.damageCommanders;
-  //   commander.map((command)=>{
-  //     // commander = commander + commander;
-  //     console.log(command);
-  //     setTheCommander(commander);
-  //     return(
-  //       <Modal
-  //           playerName={player.name}
-  //           orientation="bottom"
-  //           damage={player.damageCommanders}
-  //           commander1 = {command}
-  //           playerLP={player.lifePoint}
-  //         />
-  //     )
-  //   })
-  // };
 
-  const addLifePoint = () => {
-    let lifePoint = player.lifePoint;
-    lifePoint++;
-    setPlayer({...player, lifePoint: lifePoint});
-    AsyncStorage.setItem('Player' + playerId, JSON.stringify(player));
-  };
+  const {lifePoints, style, name, color} = useSelector((state) => state.game.players[playerId].payload);
+  const dispatch = useDispatch()
 
-  const minusLifePoint = () => {
-    let lifePoint = player.lifePoint;
-    lifePoint--;
-    setPlayer({...player, lifePoint: lifePoint});
-    AsyncStorage.setItem('Player' + playerId, JSON.stringify(player));
-  };
+  // useEffect(() => {
+  //   console.log(playerIndex);
+  // }, []);
 
   return (
 
     // button orientation
     <View style={stylesGame.container}>
-      <View style={[player.style, {backgroundColor: player.color}]}>
+      <View style={[style, {backgroundColor: color}]}>
         {orientation == 'bottom' && (
           <TouchableOpacity
             style={stylesGame.gameBtn}
-            onPress={() => {addLifePoint()}}>
+            onPress={() => dispatch(incrementLifePoint(playerId))}>
             <Image
               source={require('../img/plus.png')}
               style={stylesGame.image}
@@ -71,7 +36,7 @@ const Player = ({playerId, orientation}) => {
         {orientation == 'top' && (
           <TouchableOpacity
             style={stylesGame.gameBtn}
-            onPress={() => minusLifePoint()}>
+            onPress={() => dispatch(decrementLifePoint(playerId))}>
             <Image
               source={require('../img/minus.png')}
               style={stylesGame.image}
@@ -81,7 +46,7 @@ const Player = ({playerId, orientation}) => {
         {orientation == 'right' && (
           <TouchableOpacity
             style={stylesGame.gameBtn2}
-            onPress={() => addLifePoint()}>
+            onPress={() => dispatch(incrementLifePoint(playerId))}>
             <Image
               source={require('../img/plus.png')}
               style={stylesGame.image}
@@ -91,7 +56,7 @@ const Player = ({playerId, orientation}) => {
         {orientation == 'left' && (
           <TouchableOpacity
             style={stylesGame.gameBtn2}
-            onPress={() => minusLifePoint()}>
+            onPress={() => dispatch(decrementLifePoint(playerId))}>
             <Image
               source={require('../img/minus.png')}
               style={stylesGame.image}
@@ -102,62 +67,54 @@ const Player = ({playerId, orientation}) => {
 
 {/* Modal orientation  */}
       {orientation == 'right' && (
-        <View style={[player.style, {backgroundColor: player.color}]}>
+        <View style={[style, {backgroundColor: color}]}>
 
           <Modal
-            playerName={player.name}
+            playerName={name}
+            playerIndex={playerId}
             orientation="right"
-            damage={player.damageCommanders}
-            commander={player.commanders}
-            playerLP={player.lifePoint}
+            playerLP={lifePoints}
           />
         </View>
       )}
       {orientation == 'left' && (
-          <View style={[player.style, {backgroundColor: player.color}]}>
+          <View style={[style, {backgroundColor: color}]}>
             <Modal
-              playerName={player.name}
+              playerName={name}
+              playerIndex={playerId}
               orientation="left"
-              damage={player.damageCommanders}
-              commander={player.commanders}
-              playerLP={player.lifePoint}
-              // onPress={() => getCommander()}
+              playerLP={lifePoints}
             />
           </View>
         )}
       {orientation == 'top' && (
-        <View style={[player.style, {backgroundColor: player.color}]}>
+        <View style={[style, {backgroundColor: color}]}>
           <Modal
-            playerName={player.name}
+            playerName={name}
+            playerIndex={playerId}
             orientation="top"
-            damage={player.damageCommanders}
-            commander={theCommander}
-            playerLP={player.lifePoint}
-            onPress={() => getCommander()}
+            playerLP={lifePoints}
           />
         </View>
       )}
       {orientation == 'bottom' && (
-        <View style={[player.style, {backgroundColor: player.color}]}>
+        <View style={[style, {backgroundColor: color}]}>
           <Modal
-            playerName={player.name}
+            playerName={name}
+            playerIndex={playerId}
             orientation="bottom"
-            damage={player.damageCommanders}
-            commander1 = {theCommander}
-            commander2 = {theCommander}
-            commander3 = {theCommander}
-            playerLP={player.lifePoint}
+            playerLP={lifePoints}
           />
           {/* {getCommander()} */}
         </View>
       )}
 
 {/* button opacity */}
-      <View style={[player.style, {backgroundColor: player.color}]}>
+      <View style={[style, {backgroundColor: color}]}>
         {orientation == 'bottom' && (
           <TouchableOpacity
             style={stylesGame.gameBtn}
-            onPress={() => minusLifePoint()}>
+            onPress={() => dispatch(decrementLifePoint(playerId))}>
             <Image
               source={require('../img/minus.png')}
               style={stylesGame.image}
@@ -167,7 +124,7 @@ const Player = ({playerId, orientation}) => {
         {orientation == 'top' && (
           <TouchableOpacity
             style={stylesGame.gameBtn}
-            onPress={() => addLifePoint()}>
+            onPress={() => dispatch(incrementLifePoint(playerId))}>
             <Image
               source={require('../img/plus.png')}
               style={stylesGame.image}
@@ -177,7 +134,7 @@ const Player = ({playerId, orientation}) => {
         {orientation == 'right' && (
           <TouchableOpacity
             style={stylesGame.gameBtn2}
-            onPress={() => minusLifePoint()}>
+            onPress={() => dispatch(decrementLifePoint(playerId))}>
             <Image
               source={require('../img/minus.png')}
               style={stylesGame.image}
@@ -187,7 +144,7 @@ const Player = ({playerId, orientation}) => {
         {orientation == 'left' && (
           <TouchableOpacity
             style={stylesGame.gameBtn2}
-            onPress={() =>addLifePoint()}>
+            onPress={() =>dispatch(incrementLifePoint(playerId))}>
             <Image
               source={require('../img/plus.png')}
               style={stylesGame.image}

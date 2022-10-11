@@ -107,9 +107,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
       },
       btnContainer:{
-        flexDirection: 'row',
+        flexDirection: 'column',
         padding: 10,
       },
+      commanderContainer:{
+        backgroundColor: 'white',
+        alignItems: 'center',
+        flexDirection: 'row'
+      }
 });
 
 export default styles;

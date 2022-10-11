@@ -1,26 +1,27 @@
-import React, {useState, useEffect} from 'react';
-import {View, TouchableOpacity, Text, Modal, Pressable} from 'react-native';
+import React, {useEffect} from 'react';
+import {View, TouchableOpacity, Text} from 'react-native';
 
 //shared preferences / crypted
 import stylesGame from '../styles/game';
 import Player from '../component/player';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import {useSelector} from 'react-redux';
+
+
 const Game = ({navigation}) => {
-  const [nbPlayer, setNbPlayer] = useState('');
+  const playersList = useSelector((state) => (state.game.players).length);
+
   useEffect(() => {
-    const getNbPlayer = async () => {
-      const nbPlayer = await AsyncStorage.getItem('nbPlayer');
-      setNbPlayer(nbPlayer);
-    };
-    getNbPlayer();
+    console.log(playersList)
   }, []);
 
   const playBoard = () => {
-    if (nbPlayer == '2') {
+    console.log("this is the list" + playersList)
+    if(playersList == 2){
       return (
         <View style={stylesGame.main}>
           <View style={stylesGame.container2players}>
-            <Player playerId="1" orientation='top' />
+            <Player playerId={0} orientation='top' />
           </View>
           <View style={stylesGame.btnContainer}>
             <TouchableOpacity
@@ -32,16 +33,16 @@ const Game = ({navigation}) => {
             </TouchableOpacity>
           </View>
           <View style={stylesGame.container2players}>
-            <Player playerId="2" orientation='bottom'/>
+            <Player playerId={1} orientation='bottom' />
           </View>
         </View>
-      );
-    } else if (nbPlayer == '3') {
+      );}
+      else if (playersList == 3) {
       return (
         <View style={stylesGame.container4players}>
           <View style={stylesGame.container3players}>
-            <Player playerId="1" orientation='left'/>
-            <Player playerId="2" orientation='right'/>
+            <Player playerId={0} orientation='left' />
+            <Player playerId={1} orientation='right' />
           </View>
           <View style={stylesGame.btnContainer}>
             <TouchableOpacity
@@ -53,16 +54,16 @@ const Game = ({navigation}) => {
             </TouchableOpacity>
           </View>
           <View style={stylesGame.container3players3}>
-            <Player playerId="3" orientation='bottom'/>
+            <Player playerId={2} orientation='bottom'/>
           </View>
         </View>
       );
-    } else if (nbPlayer == '4') {
+    } else if (playersList == 4) {
       return (
         <View style={stylesGame.container4players}>
           <View style={stylesGame.container3players}>
-            <Player playerId="1" orientation='left'/>
-            <Player playerId="2" orientation = 'right'/>
+            <Player playerId={0} orientation='left' />
+            <Player playerId={1} orientation = 'right' />
           </View>
           <View style={stylesGame.btnContainer}>
             <TouchableOpacity
@@ -74,8 +75,8 @@ const Game = ({navigation}) => {
             </TouchableOpacity>
           </View>
           <View style={stylesGame.container3players}>
-            <Player playerId="3" orientation='left'/>
-            <Player playerId="4" orientation = 'right'/>
+            <Player playerId={2} orientation='left'/>
+            <Player playerId={3} orientation = 'right'/>
           </View>
         </View>
       );

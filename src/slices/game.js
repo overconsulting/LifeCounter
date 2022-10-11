@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  value: 0,
+  players: [],
 }
 
 export const gameSlice = createSlice({
@@ -21,10 +21,29 @@ export const gameSlice = createSlice({
     incrementByAmount: (state, action) => {
       state.value += action.payload
     },*/
+    clearStorage:(state) =>{
+      state.players = []
+    },
+    addPlayer:(state, player) =>{
+      state.players.push(player)
+    },
+    incrementLifePoint: ( state, index ) => {
+      state.players[index.payload].payload.lifePoints += 1
+    },
+    decrementLifePoint: ( state, index ) =>{
+      state.players[index.payload].payload.lifePoints -= 1
+    },
+    incrementCommanderDamage: (state, index)=>{
+      state.players[index.payload].payload.damageCommanders += 1
+    },
+    decrementCommanderDamage: (state, index) => {
+      state.players[index.payload].payload.damageCommanders -= 1
+    }
   },
 })
 
 // Action creators are generated for each case reducer function
 // export const { increment, decrement, incrementByAmount } = gameSlice.actions
+export const { addPlayer, clearStorage, decrementLifePoint, incrementLifePoint, incrementCommanderDamage, decrementCommanderDamage } = gameSlice.actions
 
 export default gameSlice.reducer

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -9,45 +9,69 @@ import {
 } from 'react-native';
 
 import stylesModal from '../styles/modal';
-const playerModal = ({
-  playerName,
-  commander1,
-  commander2,
-  commander3,
-  orientation,
-  damage,
-  playerLP,
-}) => {
-  const [modalVisible, setModalVisible] = useState(false);
 
+import {useSelector, useDispatch} from 'react-redux';
+import {
+  decrementCommanderDamage,
+  incrementCommanderDamage,
+} from '../slices/game';
+
+const playerModal = ({playerName, orientation, playerLP, playerIndex}) => {
+  const [modalVisible, setModalVisible] = useState(false);
+  // const {damageCommanders, commanders} = useSelector((state) => state.game.players[playerName].payload);
+  // const {color} = useSelector((state) => state.game.players[playerName].payload);
+  const {color, damageCommanders} = useSelector((state) => state.game.players[0].payload);
+  // 
+  const player = useSelector((state) => state.game.players[playerIndex]);
+  const dispatch = useDispatch();
+
+
+  useEffect(() => {
+    // console.log('oh')
+    const preventUndefined = () => {
+      if (typeof playerIndex== 'undefined' && typeof player == 'undefined') {
+        console.log('undefined care !');
+        console.log(player)
+      } else {
+        console.log(playerIndex); 
+          
+      }
+    }
+    preventUndefined()
+  }, []);
+  
   return (
     <View>
-      {orientation == 'top' && (
+      {typeof playerIndex != 'undefined' && orientation == 'top' && (
         <Modal animationType="slide" transparent={true} visible={modalVisible}>
           <View style={stylesModal.topView}>
             <View style={stylesModal.modalView}>
               <Text style={stylesModal.text}>{playerName}</Text>
-              <View style={stylesModal.btnContainer}>
-                <TouchableOpacity style={stylesModal.gameBtn}>
-                  <Image
-                    source={require('../img/plus.png')}
-                    style={stylesModal.image}
-                  />
-                </TouchableOpacity>
-                <Text style={stylesModal.text}>
-                  {commander1} : {damage}
 
-                  {commander2} : {damage}
-                  
-                  {commander3} : {damage}
-                </Text>
-                <TouchableOpacity style={stylesModal.gameBtn2}>
-                  <Image
-                    source={require('../img/minus.png')}
-                    style={stylesModal.image}
-                  />
-                </TouchableOpacity>
-              </View>
+              {damageCommanders.map((commanderDamage, index) => (
+                <View style={stylesModal.btnContainer}>
+                  <View
+                    style={[
+                      stylesModal.commanderContainer,
+                      {backgroundColor: color},
+                    ]}>
+                    <TouchableOpacity style={stylesModal.gameBtn} onPress={()=>{ dispatch(incrementCommanderDamage(playerIndex))}}>
+                      <Image
+                        source={require('../img/plus.png')}
+                        style={stylesModal.image}
+                      />
+                    </TouchableOpacity>
+                    <Text style={stylesModal.text}>{commanderDamage}</Text>
+                    <TouchableOpacity style={stylesModal.gameBtn} onPress={()=>{ dispatch(decrementCommanderDamage(playerIndex))}}>
+                      <Image
+                        source={require('../img/minus.png')}
+                        style={stylesModal.image}
+                      />
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              ))}
+
               <Pressable onPress={() => setModalVisible(!modalVisible)}>
                 <Text style={stylesModal.text}>Hide Modal</Text>
               </Pressable>
@@ -55,32 +79,34 @@ const playerModal = ({
           </View>
         </Modal>
       )}
-      {orientation == 'bottom' && (
+      {typeof playerIndex != 'undefined' && orientation == 'bottom' && (
         <Modal animationType="slide" transparent={true} visible={modalVisible}>
           <View style={stylesModal.bottomView}>
             <View style={stylesModal.modalView}>
               <Text style={stylesModal.text}>{playerName}</Text>
-              <View style={stylesModal.btnContainer}>
-                <TouchableOpacity style={stylesModal.gameBtn}>
-                  <Image
-                    source={require('../img/plus.png')}
-                    style={stylesModal.image}
-                  />
-                </TouchableOpacity>
-                <Text style={stylesModal.text}>
-                  {commander1} : {damage}
-
-                  {commander2} : {damage}
-
-                  {commander3} : {damage}
-                </Text>
-                <TouchableOpacity style={stylesModal.gameBtn2}>
-                  <Image
-                    source={require('../img/minus.png')}
-                    style={stylesModal.image}
-                  />
-                </TouchableOpacity>
-              </View>
+              {damageCommanders.map((commanderDamage, index) => (
+                <View style={stylesModal.btnContainer}>
+                  <View
+                    style={[
+                      stylesModal.commanderContainer,
+                      {backgroundColor: color},
+                    ]}>
+                    <TouchableOpacity style={stylesModal.gameBtn}>
+                      <Image
+                        source={require('../img/plus.png')}
+                        style={stylesModal.image}
+                      />
+                    </TouchableOpacity>
+                    <Text style={stylesModal.text}>{commanderDamage}</Text>
+                    <TouchableOpacity style={stylesModal.gameBtn}>
+                      <Image
+                        source={require('../img/minus.png')}
+                        style={stylesModal.image}
+                      />
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              ))}
               <Pressable onPress={() => setModalVisible(!modalVisible)}>
                 <Text style={stylesModal.text}>Hide Modal</Text>
               </Pressable>
@@ -88,32 +114,34 @@ const playerModal = ({
           </View>
         </Modal>
       )}
-      {orientation == 'right' && (
+      {typeof playerIndex != 'undefined' && orientation == 'right' && (
         <Modal animationType="slide" transparent={true} visible={modalVisible}>
           <View style={stylesModal.rightView}>
             <View style={stylesModal.modalView}>
               <Text style={stylesModal.text}>{playerName}</Text>
-              <View style={stylesModal.btnContainer}>
-                <TouchableOpacity style={stylesModal.gameBtn}>
-                  <Image
-                    source={require('../img/plus.png')}
-                    style={stylesModal.image}
-                  />
-                </TouchableOpacity>
-                <Text style={stylesModal.text}>
-                  {commander1} : {damage}
-
-                  {commander2} : {damage}
-
-                  {commander3} : {damage}
-                </Text>
-                <TouchableOpacity style={stylesModal.gameBtn2}>
-                  <Image
-                    source={require('../img/minus.png')}
-                    style={stylesModal.image}
-                  />
-                </TouchableOpacity>
-              </View>
+              {damageCommanders.map((commanderDamage, index) => (
+                <View style={stylesModal.btnContainer}>
+                  <View
+                    style={[
+                      stylesModal.commanderContainer,
+                      {backgroundColor: color},
+                    ]}>
+                    <TouchableOpacity style={stylesModal.gameBtn}>
+                      <Image
+                        source={require('../img/plus.png')}
+                        style={stylesModal.image}
+                      />
+                    </TouchableOpacity>
+                    <Text style={stylesModal.text}>{commanderDamage}</Text>
+                    <TouchableOpacity style={stylesModal.gameBtn}>
+                      <Image
+                        source={require('../img/minus.png')}
+                        style={stylesModal.image}
+                      />
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              ))}
               <Pressable onPress={() => setModalVisible(!modalVisible)}>
                 <Text style={stylesModal.text}>Hide Modal</Text>
               </Pressable>
@@ -122,32 +150,34 @@ const playerModal = ({
         </Modal>
       )}
 
-      {orientation == 'left' && (
+      {typeof playerIndex != 'undefined' && orientation == 'left' && (
         <Modal animationType="slide" transparent={true} visible={modalVisible}>
           <View style={stylesModal.leftView}>
             <View style={stylesModal.modalView}>
               <Text style={stylesModal.text}>{playerName}</Text>
-              <View style={stylesModal.btnContainer}>
-                <TouchableOpacity style={stylesModal.gameBtn2}>
-                  <Image
-                    source={require('../img/minus.png')}
-                    style={stylesModal.image}
-                  />
-                </TouchableOpacity>
-                <Text style={stylesModal.text}>
-                  {commander1} : {damage}
-
-                  {commander2} : {damage}
-
-                  {commander3} : {damage}
-                </Text>
-                <TouchableOpacity style={stylesModal.gameBtn}>
-                  <Image
-                    source={require('../img/plus.png')}
-                    style={stylesModal.image}
-                  />
-                </TouchableOpacity>
-              </View>
+              {damageCommanders.map((commanderDamage, index) => (
+                <View style={stylesModal.btnContainer}>
+                  <View
+                    style={[
+                      stylesModal.commanderContainer,
+                      {backgroundColor: color},
+                    ]}>
+                    <TouchableOpacity style={stylesModal.gameBtn}>
+                      <Image
+                        source={require('../img/plus.png')}
+                        style={stylesModal.image}
+                      />
+                    </TouchableOpacity>
+                    <Text style={stylesModal.text}>{commanderDamage}</Text>
+                    <TouchableOpacity style={stylesModal.gameBtn}>
+                      <Image
+                        source={require('../img/minus.png')}
+                        style={stylesModal.image}
+                      />
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              ))}
               <Pressable onPress={() => setModalVisible(!modalVisible)}>
                 <Text style={stylesModal.text}>Hide Modal</Text>
               </Pressable>

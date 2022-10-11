@@ -9,8 +9,9 @@ import {
   Pressable,
 } from 'react-native';
 import ColorPicker from 'react-native-wheel-color-picker';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import {useDispatch} from 'react-redux';
+import {addPlayer, clearStorage} from '../slices/game';
 import stylesPregame from '../styles/pregame';
 import stylesGame from '../styles/game';
 
@@ -19,80 +20,102 @@ const Pregame = ({navigation}) => {
   const [secondPlayer, setSecondPlayer] = useState('');
   const [thirdPlayer, setThirdPlayer] = useState('');
   const [fourthPlayer, setFourthPlayer] = useState('');
+
   const [modalVisible, setModalVisible] = useState(false);
   const [key, setKey] = useState('');
+
+  const dispatch = useDispatch();
+
   const [buttonColorPlayer1, setButtonColorPlayer1] = useState('#dc143c');
   const [buttonColorPlayer2, setButtonColorPlayer2] = useState('#87cefa');
   const [buttonColorPlayer3, setButtonColorPlayer3] = useState('#006400');
   const [buttonColorPlayer4, setButtonColorPlayer4] = useState('#800000');
 
   // Function to save players info and go to game screen
-  async function goToGame() {
-    if (firstPlayer != '' && secondPlayer != '') {
-      await AsyncStorage.setItem(
-        //AsyncStorage is like the localstorage but for mobile devices
-        'Player1',
-        JSON.stringify({
-          lifePoint: '40',
-          name: firstPlayer,
-          style: stylesGame.firstPart,
-          color: buttonColorPlayer1,
-          commanders: [2, 3, 4],
-          damageCommanders: [0, 0, 0],
-        }),
-      );
-
-      await AsyncStorage.setItem(
-        'Player2',
-        JSON.stringify({
-          lifePoint: '40',
-          name: secondPlayer,
-          style: stylesGame.secondPart,
-          color: buttonColorPlayer2,
-          commanders: [1, 3, 4],
-          damageCommanders: [0, 0, 0],
-        }),
-      );
-
-      await AsyncStorage.setItem('nbPlayer', '2');
-
-      if (thirdPlayer != '') {
-        await AsyncStorage.setItem(
-          'Player3',
-          JSON.stringify({
-            lifePoint: '40',
-            name: thirdPlayer,
-            style: stylesGame.thirdPart,
-            color: buttonColorPlayer3,
-            commanders: [1, 2, 4],
+  function goToGame() {
+    dispatch(clearStorage())
+    if (thirdPlayer == '') {
+      if (firstPlayer != '' && secondPlayer != '') {
+        dispatch(
+          addPlayer({
+            lifePoints: 20,
+            name: firstPlayer,
+            style: stylesGame.firstPart,
+            color: buttonColorPlayer1,
+            commanders: [2, 3, 4],
+            damageCommanders: [0, 0, 0],
+          }),
+        );
+        console.log(firstPlayer)
+        dispatch(
+          addPlayer({
+            lifePoints: 20,
+            name: secondPlayer,
+            style: stylesGame.secondPart,
+            color: buttonColorPlayer2,
+            commanders: [1, 3, 4],
             damageCommanders: [0, 0, 0],
           }),
         );
 
-        await AsyncStorage.setItem('nbPlayer', '3');
-
-        if (fourthPlayer != '') {
-          await AsyncStorage.setItem(
-            'Player4',
-            JSON.stringify({
-              lifePoint: '40',
-              name: fourthPlayer,
-              style: stylesGame.fourthPart,
-              color: buttonColorPlayer4,
-              commanders: [1, 2, 3],
+        navigation.navigate('Game');
+      } else {
+        alert('Please enter atleat 2 players');
+      }
+    } else {
+      if (firstPlayer != '' && secondPlayer != '') {
+        dispatch(
+          addPlayer({
+            lifePoints: 40,
+            name: firstPlayer,
+            style: stylesGame.firstPart,
+            color: buttonColorPlayer1,
+            commanders: [2, 3, 4],
+            damageCommanders: [0, 0, 0],
+          }),
+        );
+        dispatch(
+          addPlayer({
+            lifePoints: 40,
+            name: secondPlayer,
+            style: stylesGame.secondPart,
+            color: buttonColorPlayer2,
+            commanders: [1, 3, 4],
+            damageCommanders: [0, 0, 0],
+          }),
+        );
+        if (thirdPlayer != '') {
+          dispatch(
+            addPlayer({
+              lifePoints: 40,
+              name: thirdPlayer,
+              style: stylesGame.thirdPart,
+              color: buttonColorPlayer3,
+              commanders: [1, 2, 4],
               damageCommanders: [0, 0, 0],
             }),
           );
 
-          await AsyncStorage.setItem('nbPlayer', '4');
+          if (fourthPlayer != '') {
+            dispatch(
+              addPlayer({
+                lifePoints: 40,
+                name: fourthPlayer,
+                style: stylesGame.fourthPart,
+                color: buttonColorPlayer4,
+                commanders: [1, 2, 3],
+                damageCommanders: [0, 0, 0],
+              }),
+            );
+          }
         }
+        navigation.navigate('Game');
+      } else {
+        alert('Please enter atleat 2 players');
       }
-      navigation.navigate('Game');
-    } else {
-      alert('Please enter atleat 2 players');
     }
   }
-  
+
   const changeColor = (colors, key) => {
     if (key == 1) {
       setButtonColorPlayer1(colors);
@@ -112,7 +135,6 @@ const Pregame = ({navigation}) => {
     }
   };
 
-
   return (
     <ImageBackground
       source={require('../img/bg3.jpg')}
@@ -129,7 +151,6 @@ const Pregame = ({navigation}) => {
           <View style={stylesPregame.modalView}>
             <View style={stylesPregame.btn}>
               <Pressable
-                style={stylesPregame.btnColor}
                 onPress={() => setModalVisible(!modalVisible)}>
                 <Text style={stylesPregame.btnText}>x</Text>
               </Pressable>

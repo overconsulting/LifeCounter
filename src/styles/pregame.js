@@ -56,25 +56,24 @@ const styles = StyleSheet.create({
     },
 
     //Modal of pregame 
-    btnColor:{
-        backgroundColor: 'red',
-        borderRadius: 20,
-    },
     textColor:{
         color: 'black',
         textAlign: 'center',
         padding: 5,
         fontSize: 20,
     },
+    btnColor:{
+        borderRadius: 10,
+    },
     btn:{
         alignItems: 'flex-end',
     },
     btnText:{
         padding: 15,
-        color: 'white',
+        color: 'grey',
+
     },
     modalPosition:{
-        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -83,6 +82,8 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         padding: 20,
         shadowColor: "#000",
+        width: '50%',
+        height: '70%',
         shadowOffset: {
           width: 0,
           height: 2
@@ -92,7 +93,6 @@ const styles = StyleSheet.create({
         elevation: 5
       },
     contentView:{
-        flex: 1,
         justifyContent: "center",
         alignItems: "center",
     },

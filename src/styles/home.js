@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
     home:{
         flex: 1,
         alignItems: 'center',
+        justifyContent: 'center'
     },
     title:{
         fontSize: 50,
