@@ -11,7 +11,9 @@ import {
 import stylesModal from '../styles/modal';
 const playerModal = ({
   playerName,
-  commander,
+  commander1,
+  commander2,
+  commander3,
   orientation,
   damage,
   playerLP,
@@ -25,9 +27,6 @@ const playerModal = ({
           <View style={stylesModal.topView}>
             <View style={stylesModal.modalView}>
               <Text style={stylesModal.text}>{playerName}</Text>
-              <Text style={stylesModal.text}>
-              {commander} : {damage}
-              </Text>
               <View style={stylesModal.btnContainer}>
                 <TouchableOpacity style={stylesModal.gameBtn}>
                   <Image
@@ -35,6 +34,13 @@ const playerModal = ({
                     style={stylesModal.image}
                   />
                 </TouchableOpacity>
+                <Text style={stylesModal.text}>
+                  {commander1} : {damage}
+
+                  {commander2} : {damage}
+                  
+                  {commander3} : {damage}
+                </Text>
                 <TouchableOpacity style={stylesModal.gameBtn2}>
                   <Image
                     source={require('../img/minus.png')}
@@ -54,9 +60,6 @@ const playerModal = ({
           <View style={stylesModal.bottomView}>
             <View style={stylesModal.modalView}>
               <Text style={stylesModal.text}>{playerName}</Text>
-              <Text style={stylesModal.text}>
-              {commander} : {damage}
-              </Text>
               <View style={stylesModal.btnContainer}>
                 <TouchableOpacity style={stylesModal.gameBtn}>
                   <Image
@@ -64,6 +67,13 @@ const playerModal = ({
                     style={stylesModal.image}
                   />
                 </TouchableOpacity>
+                <Text style={stylesModal.text}>
+                  {commander1} : {damage}
+
+                  {commander2} : {damage}
+
+                  {commander3} : {damage}
+                </Text>
                 <TouchableOpacity style={stylesModal.gameBtn2}>
                   <Image
                     source={require('../img/minus.png')}
@@ -83,9 +93,6 @@ const playerModal = ({
           <View style={stylesModal.rightView}>
             <View style={stylesModal.modalView}>
               <Text style={stylesModal.text}>{playerName}</Text>
-              <Text style={stylesModal.text}>
-              {commander} : {damage}
-              </Text>
               <View style={stylesModal.btnContainer}>
                 <TouchableOpacity style={stylesModal.gameBtn}>
                   <Image
@@ -93,6 +100,13 @@ const playerModal = ({
                     style={stylesModal.image}
                   />
                 </TouchableOpacity>
+                <Text style={stylesModal.text}>
+                  {commander1} : {damage}
+
+                  {commander2} : {damage}
+
+                  {commander3} : {damage}
+                </Text>
                 <TouchableOpacity style={stylesModal.gameBtn2}>
                   <Image
                     source={require('../img/minus.png')}
@@ -113,9 +127,6 @@ const playerModal = ({
           <View style={stylesModal.leftView}>
             <View style={stylesModal.modalView}>
               <Text style={stylesModal.text}>{playerName}</Text>
-              <Text style={stylesModal.text}>
-              {commander} : {damage}
-              </Text>
               <View style={stylesModal.btnContainer}>
                 <TouchableOpacity style={stylesModal.gameBtn2}>
                   <Image
@@ -123,6 +134,13 @@ const playerModal = ({
                     style={stylesModal.image}
                   />
                 </TouchableOpacity>
+                <Text style={stylesModal.text}>
+                  {commander1} : {damage}
+
+                  {commander2} : {damage}
+
+                  {commander3} : {damage}
+                </Text>
                 <TouchableOpacity style={stylesModal.gameBtn}>
                   <Image
                     source={require('../img/plus.png')}

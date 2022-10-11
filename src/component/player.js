@@ -8,6 +8,8 @@ import Modal from './modal';
 
 const Player = ({playerId, orientation}) => {
   const [player, setPlayer] = useState('');
+  const [theCommander, setTheCommander] = useState('');
+
 
   useEffect(() => {
     const getPlayer = async () => {
@@ -18,12 +20,24 @@ const Player = ({playerId, orientation}) => {
     getPlayer();
   }, []);
   
-  const getCommander = () =>{
-    let commander = player.commanders;
-    commander.map((command)=>{
-      console.log(command);
-    })
-  };
+  // const getCommander = () =>{
+  //   let commander = player.commanders;
+  //   // let damage = player.damageCommanders;
+  //   commander.map((command)=>{
+  //     // commander = commander + commander;
+  //     console.log(command);
+  //     setTheCommander(commander);
+  //     return(
+  //       <Modal
+  //           playerName={player.name}
+  //           orientation="bottom"
+  //           damage={player.damageCommanders}
+  //           commander1 = {command}
+  //           playerLP={player.lifePoint}
+  //         />
+  //     )
+  //   })
+  // };
 
   const addLifePoint = () => {
     let lifePoint = player.lifePoint;
@@ -47,7 +61,7 @@ const Player = ({playerId, orientation}) => {
         {orientation == 'bottom' && (
           <TouchableOpacity
             style={stylesGame.gameBtn}
-            onPress={() => {addLifePoint(),getCommander()}}>
+            onPress={() => {addLifePoint()}}>
             <Image
               source={require('../img/plus.png')}
               style={stylesGame.image}
@@ -96,7 +110,6 @@ const Player = ({playerId, orientation}) => {
             damage={player.damageCommanders}
             commander={player.commanders}
             playerLP={player.lifePoint}
-            onPress={() => getCommander()}
           />
         </View>
       )}
@@ -108,7 +121,7 @@ const Player = ({playerId, orientation}) => {
               damage={player.damageCommanders}
               commander={player.commanders}
               playerLP={player.lifePoint}
-              onPress={() => getCommander()}
+              // onPress={() => getCommander()}
             />
           </View>
         )}
@@ -118,7 +131,7 @@ const Player = ({playerId, orientation}) => {
             playerName={player.name}
             orientation="top"
             damage={player.damageCommanders}
-            commander={player.commanders}
+            commander={theCommander}
             playerLP={player.lifePoint}
             onPress={() => getCommander()}
           />
@@ -130,10 +143,12 @@ const Player = ({playerId, orientation}) => {
             playerName={player.name}
             orientation="bottom"
             damage={player.damageCommanders}
-            commander={player.commanders}
+            commander1 = {theCommander}
+            commander2 = {theCommander}
+            commander3 = {theCommander}
             playerLP={player.lifePoint}
-            onPress={() => getCommander()}
           />
+          {/* {getCommander()} */}
         </View>
       )}
 
