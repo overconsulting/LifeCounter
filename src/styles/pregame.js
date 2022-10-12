@@ -1,27 +1,6 @@
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
-    bg:{
-        width: '100%',
-        height: '100%',
-    },
-    main:{
-        flex: 1,
-    },
-    firstContainer:{
-        flex: 1,
-    },
-    secondContainer:{
-        flex: 3,
-        alignItems: 'center',
-    } ,
-    title:{
-        fontSize: 30,
-        fontWeight: 'bold',
-        color: 'white',
-        textAlign: 'center',
-        margin: 10,
-    },
     textInput:{
         borderWidth: 1,
         borderRadius: 5,
@@ -30,21 +9,15 @@ const styles = StyleSheet.create({
         fontSize: 20,
         textAlign: 'center',
         margin: 20,
-        color: 'black',
+        color: '#851800',
+        borderColor: '#851800'
     },
     buttonContainer:{
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'center',
     },
-    startBtn:{
-        backgroundColor:'#87cefa',
-        padding: 10,
-        margin: 10,
-        borderRadius: 10,
-    },
     text:{
-        color: 'white',
         textAlign: 'center',
         padding: 5,
         fontSize: 20,
@@ -80,7 +53,6 @@ const styles = StyleSheet.create({
     modalView: {
         backgroundColor: "white",
         borderRadius: 20,
-        padding: 20,
         shadowColor: "#000",
         width: '50%',
         height: '70%',

@@ -8,42 +8,38 @@ export const gameSlice = createSlice({
   name: 'game',
   initialState,
   reducers: {
-    /*increment: (state) => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
-      state.value += 1
-    },
-    decrement: (state) => {
-      state.value -= 1
-    },
-    incrementByAmount: (state, action) => {
-      state.value += action.payload
-    },*/
     clearStorage:(state) =>{
       state.players = []
     },
-    addPlayer:(state, player) =>{
-      state.players.push(player)
+    addPlayer:(state, action) =>{
+      state.players.push(action.payload)
     },
-    incrementLifePoint: ( state, index ) => {
-      state.players[index.payload].payload.lifePoints += 1
+    setPlayer: (state, action) => {
+      if (state.players[action.payload.index]) {
+        state.players[action.payload.index] = action.payload.player
+      } else {
+        state.players.push(action.payload.player)
+      }
     },
-    decrementLifePoint: ( state, index ) =>{
-      state.players[index.payload].payload.lifePoints -= 1
+    incrementLifePoint: ( state, action ) => {
+      state.players[action.payload].lifePoints += 1
     },
-    incrementCommanderDamage: (state, index)=>{
-      state.players[index.payload].payload.damageCommanders += 1
+    decrementLifePoint: ( state, action ) =>{
+      state.players[action.payload].lifePoints -= 1
     },
-    decrementCommanderDamage: (state, index) => {
-      state.players[index.payload].payload.damageCommanders -= 1
+    incrementCommanderDamage: (state, action)=>{
+      state.players[action.payload.playerIndex].damageCommanders[action.payload.commanderIndex] += 1
+      state.players[action.payload.playerIndex].lifePoints -= 1
+    },
+    decrementCommanderDamage: (state, action) => {
+      if (state.players[action.payload.playerIndex].damageCommanders[action.payload.commanderIndex] > 0) {
+        state.players[action.payload.playerIndex].damageCommanders[action.payload.commanderIndex] -= 1
+        state.players[action.payload.playerIndex].lifePoints += 1
+      }
     }
   },
 })
 
-// Action creators are generated for each case reducer function
-// export const { increment, decrement, incrementByAmount } = gameSlice.actions
-export const { addPlayer, clearStorage, decrementLifePoint, incrementLifePoint, incrementCommanderDamage, decrementCommanderDamage } = gameSlice.actions
+export const { setPlayer, addPlayer, clearStorage, decrementLifePoint, incrementLifePoint, incrementCommanderDamage, decrementCommanderDamage } = gameSlice.actions
 
 export default gameSlice.reducer

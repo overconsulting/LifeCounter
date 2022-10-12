@@ -16,29 +16,15 @@ import {
   incrementCommanderDamage,
 } from '../slices/game';
 
-const playerModal = ({playerName, orientation, playerLP, playerIndex}) => {
+const playerModal = ({ orientation, playerIndex }) => {
   const [modalVisible, setModalVisible] = useState(false);
-  // const {damageCommanders, commanders} = useSelector((state) => state.game.players[playerName].payload);
-  // const {color} = useSelector((state) => state.game.players[playerName].payload);
-  const {color, damageCommanders} = useSelector((state) => state.game.players[0].payload);
-  // 
-  // const player = useSelector((state) => state.game.players[playerIndex]);
+  const player = useSelector((state) => state.game.players[playerIndex]);
+  const players = useSelector((state) => state.game.players);
   const dispatch = useDispatch();
 
-
-  useEffect(() => {
-    // console.log('oh')
-    // const preventUndefined = () => {
-    //   if (typeof playerIndex== 'undefined' && typeof player == 'undefined') {
-    //     console.log('undefined care !');
-    //     console.log(player)
-    //   } else {
-    //     console.log(playerIndex); 
-          
-    //   }
-    // }
-    // preventUndefined()
-  }, []);
+  /*useEffect(() => {
+    console.log(player)
+  }, [])*/
   
   return (
     <View>
@@ -46,14 +32,12 @@ const playerModal = ({playerName, orientation, playerLP, playerIndex}) => {
         <Modal animationType="slide" transparent={true} visible={modalVisible}>
           <View style={stylesModal.topView}>
             <View style={stylesModal.modalView}>
-              <Text style={stylesModal.text}>{playerName}</Text>
-
-              {damageCommanders.map((commanderDamage, index) => (
-                <View style={stylesModal.btnContainer}>
+              {player.damageCommanders.map((commanderDamage, index) => (<>
+                { players[index] && <View style={stylesModal.btnContainer}>
                   <View
                     style={[
                       stylesModal.commanderContainer,
-                      {backgroundColor: color},
+                      {backgroundColor: players[index].color},
                     ]}>
                     <TouchableOpacity style={stylesModal.gameBtn} onPress={()=>{ dispatch(incrementCommanderDamage(playerIndex))}}>
                       <Image
@@ -69,8 +53,8 @@ const playerModal = ({playerName, orientation, playerLP, playerIndex}) => {
                       />
                     </TouchableOpacity>
                   </View>
-                </View>
-              ))}
+                </View>}
+              </>))}
 
               <Pressable onPress={() => setModalVisible(!modalVisible)}>
                 <Text style={stylesModal.text}>Hide Modal</Text>
@@ -79,47 +63,56 @@ const playerModal = ({playerName, orientation, playerLP, playerIndex}) => {
           </View>
         </Modal>
       )}
+
       {typeof playerIndex != 'undefined' && orientation == 'bottom' && (
         <Modal animationType="slide" transparent={true} visible={modalVisible}>
           <View style={stylesModal.bottomView}>
             <View style={stylesModal.modalView}>
-              <Text style={stylesModal.text}>{playerName}</Text>
-              {damageCommanders.map((commanderDamage, index) => (
-                <View style={stylesModal.btnContainer}>
+              <Pressable
+                onPress={() => setModalVisible(!modalVisible)}>
+                <Text style={stylesModal.text}>x</Text>
+              </Pressable>
+              
+              {player.damageCommanders.map((commanderDamage, index) => (<>
+                { players[index] && players[index] != player && <View key={`commande-${index}`} style={stylesModal.btnContainer}>
                   <View
                     style={[
                       stylesModal.commanderContainer,
-                      {backgroundColor: color},
+                      {backgroundColor: players[index].color},
                     ]}>
-                    <TouchableOpacity style={stylesModal.gameBtn}>
+                    <TouchableOpacity 
+                      style={stylesModal.gameBtn}
+                      onPress={()=>{ dispatch(incrementCommanderDamage({playerIndex: playerIndex, commanderIndex: index }))}}
+                    >
                       <Image
                         source={require('../img/plus.png')}
                         style={stylesModal.image}
                       />
                     </TouchableOpacity>
-                    <Text style={stylesModal.text}>{commanderDamage}</Text>
-                    <TouchableOpacity style={stylesModal.gameBtn}>
+                    <Text style={stylesModal.text}>{players[index].name} {commanderDamage}</Text>
+                    <TouchableOpacity 
+                      style={stylesModal.gameBtn}
+                      onPress={()=>{ dispatch(decrementCommanderDamage({playerIndex: playerIndex, commanderIndex: index }))}}
+                    >
                       <Image
                         source={require('../img/minus.png')}
                         style={stylesModal.image}
                       />
                     </TouchableOpacity>
                   </View>
-                </View>
-              ))}
-              <Pressable onPress={() => setModalVisible(!modalVisible)}>
-                <Text style={stylesModal.text}>Hide Modal</Text>
-              </Pressable>
+                </View>}
+              </>))}
             </View>
           </View>
         </Modal>
       )}
+
       {typeof playerIndex != 'undefined' && orientation == 'right' && (
         <Modal animationType="slide" transparent={true} visible={modalVisible}>
           <View style={stylesModal.rightView}>
             <View style={stylesModal.modalView}>
-              <Text style={stylesModal.text}>{playerName}</Text>
-              {damageCommanders.map((commanderDamage, index) => (
+              <Text style={stylesModal.text}>{player.name}</Text>
+              {player.damageCommanders.map((commanderDamage, index) => (
                 <View style={stylesModal.btnContainer}>
                   <View
                     style={[
@@ -154,8 +147,12 @@ const playerModal = ({playerName, orientation, playerLP, playerIndex}) => {
         <Modal animationType="slide" transparent={true} visible={modalVisible}>
           <View style={stylesModal.leftView}>
             <View style={stylesModal.modalView}>
-              <Text style={stylesModal.text}>{playerName}</Text>
-              {damageCommanders.map((commanderDamage, index) => (
+              <Pressable
+                onPress={() => setModalVisible(!modalVisible)}>
+                <Text style={stylesModal.text}>x</Text>
+              </Pressable>
+              <Text style={stylesModal.text}>{player.name}</Text>
+              {player.damageCommanders.map((commanderDamage, index) => (
                 <View style={stylesModal.btnContainer}>
                   <View
                     style={[
@@ -189,26 +186,26 @@ const playerModal = ({playerName, orientation, playerLP, playerIndex}) => {
       <Pressable onPress={() => setModalVisible(true)}>
         {orientation == 'bottom' && (
           <View style={stylesModal.playerContainer2}>
-            <Text style={stylesModal.player}>{playerLP}</Text>
-            <Text style={stylesModal.player}>{playerName}</Text>
+            <Text style={stylesModal.player}>{player.lifePoints}</Text>
+            <Text style={stylesModal.player}>{player.name}</Text>
           </View>
         )}
         {orientation == 'top' && (
           <View style={stylesModal.playerContainer2}>
-            <Text style={stylesModal.player1}>{playerName}</Text>
-            <Text style={stylesModal.player1}>{playerLP}</Text>
+            <Text style={stylesModal.player1}>{player.name}</Text>
+            <Text style={stylesModal.player1}>{player.lifePoints}</Text>
           </View>
         )}
         {orientation == 'left' && (
           <View style={stylesModal.playerContainer}>
-            <Text style={stylesModal.player2}>{playerName}</Text>
-            <Text style={stylesModal.player2}>{playerLP}</Text>
+            <Text style={stylesModal.player2}>{player.name}</Text>
+            <Text style={stylesModal.player2}>{player.lifePoints}</Text>
           </View>
         )}
         {orientation == 'right' && (
           <View style={stylesModal.playerContainer}>
-            <Text style={stylesModal.player3}>{playerLP}</Text>
-            <Text style={stylesModal.player3}>{playerName}</Text>
+            <Text style={stylesModal.player3}>{player.lifePoints}</Text>
+            <Text style={stylesModal.player3}>{player.name}</Text>
           </View>
         )}
       </Pressable>

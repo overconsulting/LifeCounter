@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -10,12 +10,16 @@ import {
 } from 'react-native';
 import ColorPicker from 'react-native-wheel-color-picker';
 
-import {useDispatch} from 'react-redux';
-import {addPlayer, clearStorage} from '../slices/game';
+import {useDispatch, useSelector} from 'react-redux';
+import {setPlayer} from '../slices/game';
+
 import stylesPregame from '../styles/pregame';
 import stylesGame from '../styles/game';
+import stylesGlobal from '../styles/global';
 
-const Pregame = ({navigation}) => {
+const CreateGame = ({navigation}) => {
+  const playersList = useSelector((state) => (state.game.players));
+
   const [firstPlayer, setFirstPlayer] = useState('');
   const [secondPlayer, setSecondPlayer] = useState('');
   const [thirdPlayer, setThirdPlayer] = useState('');
@@ -23,122 +27,112 @@ const Pregame = ({navigation}) => {
 
   const [modalVisible, setModalVisible] = useState(false);
   const [key, setKey] = useState('');
+  const [colorPickerColor, setcolorPickerColor] = useState('#000000')
 
   const dispatch = useDispatch();
 
-  const [buttonColorPlayer1, setButtonColorPlayer1] = useState('#dc143c');
-  const [buttonColorPlayer2, setButtonColorPlayer2] = useState('#87cefa');
-  const [buttonColorPlayer3, setButtonColorPlayer3] = useState('#006400');
-  const [buttonColorPlayer4, setButtonColorPlayer4] = useState('#800000');
+  const [buttonColorPlayer1, setButtonColorPlayer1] = useState('#851800');
+  const [buttonColorPlayer2, setButtonColorPlayer2] = useState('#1a8500');
+  const [buttonColorPlayer3, setButtonColorPlayer3] = useState('#00857f');
+  const [buttonColorPlayer4, setButtonColorPlayer4] = useState('#320085');
+
+  useEffect(() => {
+    if (playersList.length !== 0) {
+      if (playersList[0]) {
+        setFirstPlayer(playersList[0].name)
+        setButtonColorPlayer1(playersList[0].color)
+      }
+      if (playersList[1]) {
+        setSecondPlayer(playersList[1].name)
+        setButtonColorPlayer2(playersList[1].color)
+      }
+      if (playersList[2]) {
+        setThirdPlayer(playersList[2].name)
+        setButtonColorPlayer3(playersList[2].color)
+      }
+      if (playersList[3]) {
+        setThirdPlayer(playersList[3].name)
+        setButtonColorPlayer4(playersList[3].color)
+      }
+    }
+  }, [])
 
   // Function to save players info and go to game screen
-  function goToGame() {
-    dispatch(clearStorage())
-    if (thirdPlayer == '') {
-      if (firstPlayer != '' && secondPlayer != '') {
+  const goToGame = () => {
+    let totalLifePoint = 20;
+    if (thirdPlayer !== '') {
+      totalLifePoint = 40;
+    }
+
+    if (firstPlayer != '' && secondPlayer != '') {
+      dispatch(
+        setPlayer({index: 0, player: {
+          lifePoints: totalLifePoint,
+          name: firstPlayer,
+          style: stylesGame.firstPart,
+          color: buttonColorPlayer1,
+          commanders: [2, 3, 4],
+          damageCommanders: [0, 0, 0],
+        }})
+      );
+
+      dispatch(
+        setPlayer({index: 1, player: {
+          lifePoints: totalLifePoint,
+          name: secondPlayer,
+          style: stylesGame.secondPart,
+          color: buttonColorPlayer2,
+          commanders: [1, 3, 4],
+          damageCommanders: [0, 0, 0],
+        }})
+      );
+
+      if (thirdPlayer != '') {
         dispatch(
-          addPlayer({
-            lifePoints: 20,
-            name: firstPlayer,
-            style: stylesGame.firstPart,
-            color: buttonColorPlayer1,
-            commanders: [2, 3, 4],
+          setPlayer({index: 2, player: {
+            lifePoints: totalLifePoint,
+            name: thirdPlayer,
+            style: stylesGame.thirdPart,
+            color: buttonColorPlayer3,
+            commanders: [1, 2, 4],
             damageCommanders: [0, 0, 0],
-          }),
-        );
-        console.log(firstPlayer)
-        dispatch(
-          addPlayer({
-            lifePoints: 20,
-            name: secondPlayer,
-            style: stylesGame.secondPart,
-            color: buttonColorPlayer2,
-            commanders: [1, 3, 4],
-            damageCommanders: [0, 0, 0],
-          }),
+          }}),
         );
 
-        navigation.navigate('Game');
-      } else {
-        alert('Please enter atleat 2 players');
-      }
-    } else {
-      if (firstPlayer != '' && secondPlayer != '') {
-        dispatch(
-          addPlayer({
-            lifePoints: 40,
-            name: firstPlayer,
-            style: stylesGame.firstPart,
-            color: buttonColorPlayer1,
-            commanders: [2, 3, 4],
-            damageCommanders: [0, 0, 0],
-          }),
-        );
-        dispatch(
-          addPlayer({
-            lifePoints: 40,
-            name: secondPlayer,
-            style: stylesGame.secondPart,
-            color: buttonColorPlayer2,
-            commanders: [1, 3, 4],
-            damageCommanders: [0, 0, 0],
-          }),
-        );
-        if (thirdPlayer != '') {
+        if (fourthPlayer != '') {
           dispatch(
-            addPlayer({
-              lifePoints: 40,
-              name: thirdPlayer,
-              style: stylesGame.thirdPart,
-              color: buttonColorPlayer3,
-              commanders: [1, 2, 4],
+            setPlayer({index: 3, player: {
+              lifePoints: totalLifePoint,
+              name: fourthPlayer,
+              style: stylesGame.fourthPart,
+              color: buttonColorPlayer4,
+              commanders: [1, 2, 3],
               damageCommanders: [0, 0, 0],
-            }),
+            }}),
           );
-
-          if (fourthPlayer != '') {
-            dispatch(
-              addPlayer({
-                lifePoints: 40,
-                name: fourthPlayer,
-                style: stylesGame.fourthPart,
-                color: buttonColorPlayer4,
-                commanders: [1, 2, 3],
-                damageCommanders: [0, 0, 0],
-              }),
-            );
-          }
         }
-        navigation.navigate('Game');
-      } else {
-        alert('Please enter atleat 2 players');
       }
+
+      navigation.navigate('Game');
+    } else {
+      alert('Il faut au moins deux joueurs !');
     }
   }
 
   const changeColor = (colors, key) => {
     if (key == 1) {
       setButtonColorPlayer1(colors);
-      console.log(buttonColorPlayer1);
     } else if (key == 2) {
       setButtonColorPlayer2(colors);
-      console.log(buttonColorPlayer2);
     } else if (key == 3) {
       setButtonColorPlayer3(colors);
-      console.log(buttonColorPlayer3);
     } else if (key == 4) {
       setButtonColorPlayer4(colors);
-      console.log(buttonColorPlayer4);
-    } else {
-      alert('Something went wrong');
-      console.log(key);
     }
   };
 
   return (
-    <ImageBackground
-      source={require('../img/bg3.jpg')}
-      style={stylesPregame.bg}>
+    <ImageBackground source={require('../img/bg3.jpg')} style={stylesGlobal.bg}>
       <Modal
         animationType="slide"
         transparent={true}
@@ -156,12 +150,13 @@ const Pregame = ({navigation}) => {
               </Pressable>
             </View>
             <View style={stylesPregame.contentView}>
-              <Text style={stylesPregame.modalText}> Choose your color </Text>
+              <Text style={stylesPregame.modalText}> Choississez la couleur </Text>
 
               <ColorPicker
                 onColorChangeComplete={color => {
-                  console.log(color), changeColor(color, key);
+                  changeColor(color, key);
                 }}
+                color={colorPickerColor}
                 sliderHidden={true}
                 swatches={false}
                 thumbSize={30}
@@ -171,21 +166,19 @@ const Pregame = ({navigation}) => {
         </View>
       </Modal>
 
-      <View style={stylesPregame.main}>
-        <View style={stylesPregame.firstContainer}>
-          <Text style={stylesPregame.title}>
-            {' '}
-            This is the lobby for the game
+      <View style={stylesGlobal.main}>
+        <View style={stylesGlobal.firstContainer}>
+          <Text style={[stylesGlobal.title, stylesGlobal.txtRed]}>
+            Créer la partie
           </Text>
         </View>
 
-        <View style={stylesPregame.secondContainer}>
-          <Text style={stylesPregame.text}> Put your nickname : </Text>
+        <View style={stylesGlobal.secondContainer}>
           <View style={stylesPregame.inputContainer}>
             <TextInput
               style={stylesPregame.textInput}
               value={firstPlayer}
-              placeholder="First Player"
+              placeholder="Premier joueur"
               onChangeText={newText => setFirstPlayer(newText)}
             />
             <TouchableOpacity
@@ -194,7 +187,7 @@ const Pregame = ({navigation}) => {
                 {backgroundColor: buttonColorPlayer1},
               ]}
               onPress={() => {
-                setModalVisible(true), console.log('ok'), setKey(1);
+                setKey(1), setcolorPickerColor(buttonColorPlayer1), setModalVisible(true);
               }}>
               <Text style={stylesPregame.textColor}>Color</Text>
             </TouchableOpacity>
@@ -204,7 +197,7 @@ const Pregame = ({navigation}) => {
             <TextInput
               style={stylesPregame.textInput}
               value={secondPlayer}
-              placeholder="Second Player"
+              placeholder="Second joueur"
               onChangeText={newText => setSecondPlayer(newText)}
               editable={firstPlayer == '' ? false : true}
             />
@@ -214,7 +207,7 @@ const Pregame = ({navigation}) => {
                 {backgroundColor: buttonColorPlayer2},
               ]}
               onPress={() => {
-                setModalVisible(true), console.log('ok'), setKey(2);
+                setKey(2), setcolorPickerColor(buttonColorPlayer2), setModalVisible(true);
               }}>
               <Text style={stylesPregame.textColor}>Color</Text>
             </TouchableOpacity>
@@ -224,7 +217,7 @@ const Pregame = ({navigation}) => {
             <TextInput
               style={stylesPregame.textInput}
               value={thirdPlayer}
-              placeholder="Third Player"
+              placeholder="Troisième joueur"
               onChangeText={newText => setThirdPlayer(newText)}
               editable={secondPlayer == '' ? false : true}
             />
@@ -234,7 +227,7 @@ const Pregame = ({navigation}) => {
                 {backgroundColor: buttonColorPlayer3},
               ]}
               onPress={() => {
-                setModalVisible(true), console.log('ok'), setKey(3);
+                setKey(3), setcolorPickerColor(buttonColorPlayer3), setModalVisible(true);
               }}>
               <Text style={stylesPregame.textColor}>Color</Text>
             </TouchableOpacity>
@@ -244,7 +237,7 @@ const Pregame = ({navigation}) => {
             <TextInput
               style={stylesPregame.textInput}
               value={fourthPlayer}
-              placeholder="Fourth Player"
+              placeholder="Quatrième joueur"
               onChangeText={newText => setFourthPlayer(newText)}
               editable={thirdPlayer == '' ? false : true}
             />
@@ -254,34 +247,24 @@ const Pregame = ({navigation}) => {
                 {backgroundColor: buttonColorPlayer4},
               ]}
               onPress={() => {
-                setModalVisible(true), console.log('ok'), setKey(4);
+                setKey(4), setcolorPickerColor(buttonColorPlayer4), setModalVisible(true);
               }}>
               <Text style={stylesPregame.textColor}>Color</Text>
             </TouchableOpacity>
           </View>
 
-          <View style={stylesPregame.buttonContainer}>
+          <View style={[stylesPregame.buttonContainer, stylesGlobal.marginTop50]}>
             <TouchableOpacity
-              onPress={() => {
-                goToGame();
-              }}
-              style={stylesPregame.startBtn}>
-              <Text style={stylesPregame.text}>Start the game</Text>
+              onPress={() => { goToGame(); }}
+              style={[stylesGlobal.btnRed]}>
+              <Text style={[stylesGlobal.txtWhite]}>Jouer</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={stylesPregame.startBtn}
-              onPress={() => {
-                navigation.navigate('Game');
-              }}>
-              <Text style={stylesPregame.text}>Go back to game</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={stylesPregame.startBtn}
+              style={[stylesGlobal.btnRed, stylesGlobal.marginLeft50]}
               onPress={() => {
                 navigation.navigate('Home');
               }}>
-              <Text style={stylesPregame.text}>Go back to home</Text>
+              <Text style={[stylesGlobal.txtWhite]}>Home</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -289,4 +272,4 @@ const Pregame = ({navigation}) => {
     </ImageBackground>
   );
 };
-export default Pregame;
+export default CreateGame;

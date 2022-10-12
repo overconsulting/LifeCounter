@@ -1,20 +1,22 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, ImageBackground} from 'react-native';
 
-import stylesHome from '../styles/home';
+import stylesGlobal from '../styles/global';
+
 const Home = ({navigation}) => {
 
   return (
-    <ImageBackground source={require('../img/bg.png')} style={stylesHome.bg}>
-    <View style={stylesHome.home}>
-      <Text style={stylesHome.title}> Welcome to LifePoint counteur</Text>
-      <View style={stylesHome.home}>
-        <TouchableOpacity onPress={() => navigation.navigate('Pregame')} style={stylesHome.gameBtn}>
-          <Text>Pre - Game</Text>
-        </TouchableOpacity>
+    <ImageBackground source={require('../img/bg.png')} style={stylesGlobal.bg}>
+      <View style={stylesGlobal.main}>
+        <Text style={[stylesGlobal.title, stylesGlobal.txtRed, stylesGlobal.firstContainer]}>Compteur de point de vie</Text>
+        <View style={[stylesGlobal.center, stylesGlobal.secondContainer]}>
+          <TouchableOpacity onPress={() => navigation.navigate('CreateGame')} style={stylesGlobal.btnRed}>
+            <Text style={stylesGlobal.txtWhite}>Jouer</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
     </ImageBackground>
   );
 };
+
 export default Home;
