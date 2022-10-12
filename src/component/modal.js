@@ -22,22 +22,22 @@ const playerModal = ({playerName, orientation, playerLP, playerIndex}) => {
   // const {color} = useSelector((state) => state.game.players[playerName].payload);
   const {color, damageCommanders} = useSelector((state) => state.game.players[0].payload);
   // 
-  const player = useSelector((state) => state.game.players[playerIndex]);
+  // const player = useSelector((state) => state.game.players[playerIndex]);
   const dispatch = useDispatch();
 
 
   useEffect(() => {
     // console.log('oh')
-    const preventUndefined = () => {
-      if (typeof playerIndex== 'undefined' && typeof player == 'undefined') {
-        console.log('undefined care !');
-        console.log(player)
-      } else {
-        console.log(playerIndex); 
+    // const preventUndefined = () => {
+    //   if (typeof playerIndex== 'undefined' && typeof player == 'undefined') {
+    //     console.log('undefined care !');
+    //     console.log(player)
+    //   } else {
+    //     console.log(playerIndex); 
           
-      }
-    }
-    preventUndefined()
+    //   }
+    // }
+    // preventUndefined()
   }, []);
   
   return (

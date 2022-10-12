@@ -105,7 +105,6 @@ const Player = ({playerId, orientation}) => {
             orientation="bottom"
             playerLP={lifePoints}
           />
-          {/* {getCommander()} */}
         </View>
       )}
 
