@@ -44,7 +44,6 @@ const styles = StyleSheet.create({
     btnText:{
         padding: 15,
         color: 'grey',
-
     },
     modalPosition:{
         justifyContent: 'center',

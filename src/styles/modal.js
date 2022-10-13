@@ -4,8 +4,7 @@ const styles = StyleSheet.create({
     modalView: {
         backgroundColor: "white",
         borderRadius: 20,
-        padding: 50,
-        alignItems: "center",
+        padding: 20,
         shadowColor: "#000",
         shadowOffset: {
           width: 0,
@@ -17,35 +16,36 @@ const styles = StyleSheet.create({
       },
       topView:{
         flex: 1,
-        padding: 50,
-        justifyContent: "center",
-        alignItems: "center",
+        padding:20,
+        justifyContent: 'center',
+        alignItems: 'center',
         transform: [{ rotate: '180deg'}],
       },
       bottomView:{
         flex: 1,
-        padding: 50,
-        justifyContent: "center",
-        alignItems: "center",
+        padding: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
       },
       rightView: {
         flex: 1,
-        padding: 50,
+        padding: 20,
         justifyContent: "center",
+        alignItems: 'center',
         alignContent: "flex-end",
         transform: [{rotate: '270deg'}],
       },
       leftView:{
         flex: 1,
-        padding: 50,
+        padding: 20,
         justifyContent: "center",
+        alignItems: 'center',
         alignContent: "flex-end",
         transform: [{rotate: '90deg'}],
       },
       playerContainer:{
         justifyContent: "center",
         alignItems: "center",
-        flexDirection: 'row',
       },
       playerContainer2:{
         justifyContent: "center",
@@ -114,7 +114,19 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         alignItems: 'center',
         flexDirection: 'row'
-      }
+      },
+      modalX:{
+        alignItems: 'flex-end',
+      },
+      modalXText:{
+          color: 'grey',
+          fontSize: 20,
+      },
+      modalPlayerName:{
+        fontSize: 20,
+        textAlign: 'center',
+        margin: 10,
+      },
 });
 
 export default styles;

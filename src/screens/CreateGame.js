@@ -11,7 +11,7 @@ import {
 import ColorPicker from 'react-native-wheel-color-picker';
 
 import {useDispatch, useSelector} from 'react-redux';
-import {setPlayer} from '../slices/game';
+import {setPlayer, clearStorage} from '../slices/game';
 
 import stylesPregame from '../styles/pregame';
 import stylesGame from '../styles/game';
@@ -63,7 +63,8 @@ const CreateGame = ({navigation}) => {
     if (thirdPlayer !== '') {
       totalLifePoint = 40;
     }
-
+    dispatch(clearStorage());
+    
     if (firstPlayer != '' && secondPlayer != '') {
       dispatch(
         setPlayer({index: 0, player: {

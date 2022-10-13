@@ -15,14 +15,14 @@ const styles = StyleSheet.create({
   container2players : {
     flex: 1,
   },
-  container3players:{
+  container2PlayersRow:{
     flex: 2,
     flexDirection: 'row',
   },
-  container3players3:{
+  container3playersAlone:{
     flex: 2,
   },
-  container4players: {
+  containerMultiplePlayers: {
     flex: 1,
     alignItems: 'stretch',
   },

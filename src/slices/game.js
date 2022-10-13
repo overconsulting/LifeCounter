@@ -11,9 +11,9 @@ export const gameSlice = createSlice({
     clearStorage:(state) =>{
       state.players = []
     },
-    addPlayer:(state, action) =>{
-      state.players.push(action.payload)
-    },
+    // addPlayer:(state, action) =>{
+    //   state.players.push(action.payload)
+    // },
     setPlayer: (state, action) => {
       if (state.players[action.payload.index]) {
         state.players[action.payload.index] = action.payload.player
@@ -28,8 +28,8 @@ export const gameSlice = createSlice({
       state.players[action.payload].lifePoints -= 1
     },
     incrementCommanderDamage: (state, action)=>{
-      state.players[action.payload.playerIndex].damageCommanders[action.payload.commanderIndex] += 1
-      state.players[action.payload.playerIndex].lifePoints -= 1
+        state.players[action.payload.playerIndex].damageCommanders[action.payload.commanderIndex] += 1
+        state.players[action.payload.playerIndex].lifePoints -= 1
     },
     decrementCommanderDamage: (state, action) => {
       if (state.players[action.payload.playerIndex].damageCommanders[action.payload.commanderIndex] > 0) {
