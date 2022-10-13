@@ -23,7 +23,7 @@ const playerModal = ({orientation, playerIndex}) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(playerIndex);
+    console.log(player);
   }, []);
 
   return (

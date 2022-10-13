@@ -51,7 +51,7 @@ const CreateGame = ({navigation}) => {
         setButtonColorPlayer3(playersList[2].color)
       }
       if (playersList[3]) {
-        setThirdPlayer(playersList[3].name)
+        setFourthPlayer(playersList[3].name)
         setButtonColorPlayer4(playersList[3].color)
       }
     }
@@ -63,8 +63,8 @@ const CreateGame = ({navigation}) => {
     if (thirdPlayer !== '') {
       totalLifePoint = 40;
     }
-    dispatch(clearStorage());
-    
+    // dispatch(clearStorage());
+
     if (firstPlayer != '' && secondPlayer != '') {
       dispatch(
         setPlayer({index: 0, player: {

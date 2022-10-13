@@ -128,11 +128,12 @@ const Game = ({navigation}) => {
             </View>
           )}
 
-          {/* {players.length == 4 && (
+          {players.length == 4 && (
+            
             <View style={stylesGame.containerMultiplePlayers}>
               <View style={stylesGame.container2PlayersRow}>
-                <Player playerId={0} orientation="left" />
-                <Player playerId={1} orientation="right" />
+                <Player playerIndex={0} orientation="left" />
+                <Player playerIndex={1} orientation="right" />
               </View>
               <View style={stylesGame.btnContainer}>
                 <TouchableOpacity
@@ -144,11 +145,11 @@ const Game = ({navigation}) => {
                 </TouchableOpacity>
               </View>
               <View style={stylesGame.container2PlayersRow}>
-                <Player playerId={2} orientation="left" />
-                <Player playerId={3} orientation="right" />
+                <Player playerIndex={2} orientation="left" />
+                <Player playerIndex={3} orientation="right" />
               </View>
             </View>
-          )} */}
+          )}
         </>
       )}
     </>

@@ -11,11 +11,11 @@ import Modal from './modal';
 const Player = ({playerIndex, orientation}) => {
   
   const player = useSelector((state) => state.game.players[playerIndex]);
-  const {lifePoints, style, name, color} = useSelector((state) => state.game.players[playerIndex]);
+  const {style, color} = useSelector((state) => state.game.players[playerIndex]);
   const dispatch = useDispatch()
 
   useEffect(() => {
-    console.log(player)
+    console.log(player);
   },  [])
 
   return (
