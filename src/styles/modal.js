@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
       playerContainer:{
         justifyContent: "center",
         alignItems: "center",
+        flexDirection: 'row',
       },
       playerContainer2:{
         justifyContent: "center",
