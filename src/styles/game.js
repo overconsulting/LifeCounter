@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
   },
   container3playersAlone:{
     flex: 2,
+    // flexDirection: 'row',
   },
   containerMultiplePlayers: {
     flex: 1,
@@ -55,12 +56,13 @@ const styles = StyleSheet.create({
     flex: 2,
     justifyContent: 'center',
     alignItems: 'center',
+
   },
   gameBtn2:{
-    flex: 2,
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    transform: [{rotate: '90deg'}],
+
   },
   addDeleteBtnContainer1:{
     flex: 1,
@@ -94,9 +96,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     backgroundColor: 'black',
   },
-  image: {
+  imageLeftRight: {
     width: 50,
     height: 50,
+    transform: [{rotate: '90deg'}],
   },
+  imageTopBot:{
+    width: 50,
+    height: 50,
+  }
 });
 export default styles;

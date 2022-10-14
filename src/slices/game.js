@@ -8,12 +8,15 @@ export const gameSlice = createSlice({
   name: 'game',
   initialState,
   reducers: {
-    clearStorage:(state) =>{
-      state.players = []
+    clearUser:(state, action) =>{
+      if(state.players[action.payload.index]){
+        state.players.splice(action.payload.index, 1)
+      }
     },
-    // addPlayer:(state, action) =>{
-    //   state.players.push(action.payload)
-    // },
+    clearStorage:(state) =>{
+      state.players = ''
+      console.log(state.players)
+    },
     setPlayer: (state, action) => {
       if (state.players[action.payload.index]) {
         state.players[action.payload.index] = action.payload.player
@@ -40,6 +43,6 @@ export const gameSlice = createSlice({
   },
 })
 
-export const { setPlayer, addPlayer, clearStorage, decrementLifePoint, incrementLifePoint, incrementCommanderDamage, decrementCommanderDamage } = gameSlice.actions
+export const { setPlayer, addPlayer, clearUser, decrementLifePoint, incrementLifePoint, incrementCommanderDamage, decrementCommanderDamage, clearStorage } = gameSlice.actions
 
 export default gameSlice.reducer

@@ -11,7 +11,7 @@ import {
 import ColorPicker from 'react-native-wheel-color-picker';
 
 import {useDispatch, useSelector} from 'react-redux';
-import {setPlayer, clearStorage} from '../slices/game';
+import {setPlayer, clearUser} from '../slices/game';
 
 import stylesPregame from '../styles/pregame';
 import stylesGame from '../styles/game';
@@ -28,8 +28,8 @@ const CreateGame = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [key, setKey] = useState('');
   const [colorPickerColor, setcolorPickerColor] = useState('#000000')
-
   const dispatch = useDispatch();
+
 
   const [buttonColorPlayer1, setButtonColorPlayer1] = useState('#851800');
   const [buttonColorPlayer2, setButtonColorPlayer2] = useState('#1a8500');
@@ -50,11 +50,12 @@ const CreateGame = ({navigation}) => {
         setThirdPlayer(playersList[2].name)
         setButtonColorPlayer3(playersList[2].color)
       }
+
       if (playersList[3]) {
         setFourthPlayer(playersList[3].name)
         setButtonColorPlayer4(playersList[3].color)
       }
-    }
+  }
   }, [])
 
   // Function to save players info and go to game screen
@@ -64,6 +65,17 @@ const CreateGame = ({navigation}) => {
       totalLifePoint = 40;
     }
     // dispatch(clearStorage());
+
+    if (thirdPlayer == ''){
+      if (playersList[2]){
+        dispatch(clearUser({index: 2}))
+      }
+    }
+    if (fourthPlayer == ''){
+      if (playersList[3]){ 
+        dispatch(clearUser({index: 3}))
+      }
+    }
 
     if (firstPlayer != '' && secondPlayer != '') {
       dispatch(

@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 4,
-        elevation: 5
+        elevation: 5,
       },
       topView:{
         flex: 1,
@@ -26,14 +26,14 @@ const styles = StyleSheet.create({
         padding: 20,
         justifyContent: 'center',
         alignItems: 'center',
+
       },
       rightView: {
         flex: 1,
         padding: 20,
         justifyContent: "center",
         alignItems: 'center',
-        alignContent: "flex-end",
-        transform: [{rotate: '270deg'}],
+      
       },
       leftView:{
         flex: 1,
@@ -41,12 +41,14 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: 'center',
         alignContent: "flex-end",
-        transform: [{rotate: '90deg'}],
+        // transform: [{rotate: '90deg'}],
       },
       playerContainer:{
         justifyContent: "center",
         alignItems: "center",
         flexDirection: 'row',
+        // backgroundColor: 'white',
+        padding: 40,
       },
       playerContainer2:{
         justifyContent: "center",
@@ -93,6 +95,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 30,
         margin: 10,
+        transform: [{rotate: '90deg'}],
       },
       image:{
         width: 50,
@@ -102,6 +105,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         margin: 10,
+        
       },
       gameBtn2:{
         justifyContent: 'center',
@@ -110,6 +114,7 @@ const styles = StyleSheet.create({
       btnContainer:{
         flexDirection: 'column',
         padding: 10,
+        
       },
       commanderContainer:{
         backgroundColor: 'white',

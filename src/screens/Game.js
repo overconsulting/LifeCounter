@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {View, TouchableOpacity, Text} from 'react-native';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import { clearStorage } from '../slices/game';
 
 //shared preferences / crypted
 import stylesGame from '../styles/game';
@@ -10,78 +11,12 @@ import Player from '../component/player';
 
 const Game = ({navigation}) => {
   const players = useSelector(state => state.game.players);
+  const dispatch = useDispatch()
+
 
   useEffect(() => {
     console.log(players, players.length);
   }, []);
-
-  /*const playBoard = () => {
-    console.log("this is the list" + playersList)
-    if(playersList == 2){
-      return (
-        <View style={stylesGame.main}>
-          <View style={stylesGame.container2players}>
-            <Player playerId={0} orientation='top' />
-          </View>
-          <View style={stylesGame.btnContainer}>
-            <TouchableOpacity
-              style={stylesGame.gameBtn}
-              onPress={() => {
-                navigation.navigate('Pregame');
-              }}>
-              <Text style={stylesGame.text}>Back to lobby</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={stylesGame.container2players}>
-            <Player playerId={1} orientation='bottom' />
-          </View>
-        </View>
-      );}
-      else if (playersList == 3) {
-      return (
-        <View style={stylesGame.container4players}>
-          <View style={stylesGame.container3players}>
-            <Player playerId={0} orientation='left' />
-            <Player playerId={1} orientation='right' />
-          </View>
-          <View style={stylesGame.btnContainer}>
-            <TouchableOpacity
-              style={stylesGame.gameBtn}
-              onPress={() => {
-                navigation.navigate('Pregame');
-              }}>
-              <Text style={stylesGame.text}>Back to lobby</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={stylesGame.container3players3}>
-            <Player playerId={2} orientation='bottom'/>
-          </View>
-        </View>
-      );
-    } else if (playersList == 4) {
-      return (
-        <View style={stylesGame.container4players}>
-          <View style={stylesGame.container3players}>
-            <Player playerId={0} orientation='left' />
-            <Player playerId={1} orientation = 'right' />
-          </View>
-          <View style={stylesGame.btnContainer}>
-            <TouchableOpacity
-              style={stylesGame.gameBtn}
-              onPress={() => {
-                navigation.navigate('Pregame');
-              }}>
-              <Text style={stylesGame.text}>Back to lobby</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={stylesGame.container3players}>
-            <Player playerId={2} orientation='left'/>
-            <Player playerId={3} orientation = 'right'/>
-          </View>
-        </View>
-      );
-    }
-  };*/
 
   return (
     <>
@@ -104,6 +39,11 @@ const Game = ({navigation}) => {
               <View style={stylesGame.container2players}>
                 <Player playerIndex={1} orientation="bottom" />
               </View>
+              <View style={stylesGame.btnContainer}>
+                <TouchableOpacity style={stylesGame.gameBtn} onPress={() => {navigation.navigate('Home') }}>
+                  <Text style={stylesGame.text}>Restart Game</Text>
+                </TouchableOpacity>
+              </View>
             </View>
           )}
 
@@ -123,7 +63,7 @@ const Game = ({navigation}) => {
                 </TouchableOpacity>
               </View>
               <View style={stylesGame.container3playersAlone}>
-                <Player playerIndex={2} orientation="bottom" />
+                <Player playerIndex={2} orientation="left" />
               </View>
             </View>
           )}
@@ -143,6 +83,7 @@ const Game = ({navigation}) => {
                   }}>
                   <Text style={stylesGame.text}>Accueil</Text>
                 </TouchableOpacity>
+                
               </View>
               <View style={stylesGame.container2PlayersRow}>
                 <Player playerIndex={2} orientation="left" />
